@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2d59"/>
+      <stop offset="100%" stop-color="#1e4a85"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd13b"/>
+      <stop offset="100%" stop-color="#febb02"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Outer Rim -->
+  <rect x="12" y="12" width="488" height="488" rx="116" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="8"/>
+
+  <!-- Graduation Cap Icon -->
+  <g filter="url(#dropShadow)" transform="translate(0, -10)">
+    <!-- Mortarboard Top Rhombus -->
+    <path d="M256 120 L440 210 L256 300 L72 210 Z" fill="url(#goldGrad)"/>
+    
+    <!-- Cap Skull Base -->
+    <path d="M148 248 L148 335 C148 385 364 385 364 335 L364 248 L256 300 Z" fill="#e5a700"/>
+    
+    <!-- Tassel Button & Cord -->
+    <circle cx="256" cy="210" r="14" fill="#ffffff"/>
+    <path d="M256 210 Q380 230 400 300" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+    <!-- Tassel Fringe -->
+    <path d="M394 295 L406 295 L412 360 L388 360 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Location / Verified Map Pin Indicator -->
+  <circle cx="256" cy="425" r="22" fill="#22c55e" stroke="#ffffff" stroke-width="6"/>
+  <path d="M248 425 L254 431 L266 419" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
