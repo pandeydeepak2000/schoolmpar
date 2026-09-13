@@ -217,83 +217,56 @@ class AuthController extends Controller
     public function redirectToGoogle(Request $request)
     {
         $role = $request->query('role', 'parent');
-        session(['oauth_intended_role' => $role]);
+        session(['oauth_intended_role' => in_array($role, ['parent', 'school_owner']) ? $role : 'parent']);
 
-        if (config('services.google.client_id') && config('services.google.client_secret')) {
+        $clientId     = config('services.google.client_id');
+        $clientSecret = config('services.google.client_secret');
+
+        if (!empty($clientId) && !empty($clientSecret)) {
             try {
                 return Socialite::driver('google')->redirect();
             } catch (\Throwable $e) {
-                Log::warning('Google OAuth redirect error: ' . $e->getMessage());
+                Log::error('Google OAuth redirect error: ' . $e->getMessage());
+                return redirect()->route('login')->with('error', 'Google Sign-In connection error: ' . $e->getMessage());
             }
         }
 
-        // Demo fallback if GOOGLE_CLIENT_ID not yet added to .env
-        if ($role === 'school_owner') {
-            $demoUser = User::firstOrCreate(
-                ['email' => 'partner.demo@schoolmapr.com'],
-                [
-                    'name'      => 'Demo School Partner',
-                    'phone'     => '+91 9876509999',
-                    'password'  => Hash::make(Str::random(16)),
-                    'google_id' => 'demo_google_partner_999',
-                ]
-            );
-
-            if (!$demoUser->hasRole('school_owner')) {
-                $demoUser->assignRole('school_owner');
-            }
-
-            Auth::login($demoUser, true);
-
-            return redirect()->route('school-owner.dashboard')
-                             ->with('success', 'Signed in as School Partner with Google (Demo mode) 🎉');
-        }
-
-        $demoUser = User::firstOrCreate(
-            ['email' => 'parent.demo@schoolmapr.com'],
-            [
-                'name'      => 'Demo Google Parent',
-                'phone'     => '+91 9876501234',
-                'password'  => Hash::make(Str::random(16)),
-                'google_id' => 'demo_google_12345',
-            ]
-        );
-
-        if (!$demoUser->hasRole('parent')) {
-            $demoUser->assignRole('parent');
-        }
-
-        Auth::login($demoUser, true);
-
-        return redirect()->route('parent.dashboard')
-                         ->with('success', 'Signed in with Google (Demo mode - Add GOOGLE_CLIENT_ID in .env for Live Google OAuth) 🎉');
+        return redirect()->route('login')->with('error', '⚠️ Google Sign-In is not configured yet. Please sign in with your Email & Password or Register a new account.');
     }
 
     public function handleGoogleCallback()
     {
         try {
             $googleUser = Socialite::driver('google')->user();
+            $email = strtolower(trim($googleUser->getEmail() ?? ''));
+
+            if (empty($email)) {
+                return redirect()->route('login')->with('error', '⚠️ Could not retrieve a verified email address from your Google account.');
+            }
+
             $intendedRole = session()->pull('oauth_intended_role', 'parent');
             
-            $isNew = false;
             $user = User::where('google_id', $googleUser->getId())
-                        ->orWhere('email', $googleUser->getEmail())
+                        ->orWhere('email', $email)
                         ->first();
 
+            $isNew = false;
             if (!$user) {
                 $isNew = true;
                 $user = User::create([
-                    'name'      => $googleUser->getName() ?? 'Google User',
-                    'email'     => $googleUser->getEmail(),
-                    'google_id' => $googleUser->getId(),
-                    'avatar'    => $googleUser->getAvatar(),
-                    'password'  => Hash::make(Str::random(24)),
+                    'name'              => $googleUser->getName() ?: 'Google User',
+                    'email'             => $email,
+                    'google_id'         => $googleUser->getId(),
+                    'avatar'            => $googleUser->getAvatar(),
+                    'email_verified_at' => now(),
+                    'password'          => Hash::make(Str::random(32)),
                 ]);
-                $user->assignRole($intendedRole);
+                $user->assignRole(in_array($intendedRole, ['parent', 'school_owner']) ? $intendedRole : 'parent');
             } else {
                 $user->update([
-                    'google_id' => $googleUser->getId(),
-                    'avatar'    => $googleUser->getAvatar() ?? $user->avatar,
+                    'google_id'         => $googleUser->getId(),
+                    'avatar'            => $googleUser->getAvatar() ?? $user->avatar,
+                    'email_verified_at' => $user->email_verified_at ?? now(),
                 ]);
             }
 
@@ -311,7 +284,7 @@ class AuthController extends Controller
             return $this->authenticatedRedirect($user);
         } catch (\Throwable $e) {
             Log::error('Google callback error: ' . $e->getMessage());
-            return redirect()->route('login')->with('error', 'Google sign-in could not be completed: ' . $e->getMessage());
+            return redirect()->route('login')->with('error', '⚠️ Google sign-in was cancelled or failed: ' . $e->getMessage());
         }
     }
 
