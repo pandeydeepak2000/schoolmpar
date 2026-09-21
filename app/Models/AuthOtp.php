@@ -70,14 +70,14 @@ class AuthOtp extends Model
         if (!$record) {
             return [
                 'valid'   => false,
-                'message' => 'No active verification code found for this email. Please request a new code.',
+                'message' => 'No active verification code found for this address/number. Please click "Get OTP".',
             ];
         }
 
         if (Carbon::now()->isAfter($record->expires_at)) {
             return [
                 'valid'   => false,
-                'message' => 'Verification code has expired. Please click "Resend Code".',
+                'message' => 'Verification code has expired. Please click "Resend OTP".',
             ];
         }
 
@@ -104,7 +104,7 @@ class AuthOtp extends Model
 
             return [
                 'valid'   => false,
-                'message' => "Incorrect verification code ({$remaining} attempt(s) remaining). Please check your Gmail.",
+                'message' => "Incorrect verification code ({$remaining} attempt(s) remaining). Please check your code carefully.",
             ];
         }
 
@@ -114,7 +114,7 @@ class AuthOtp extends Model
 
         return [
             'valid'   => true,
-            'message' => 'Email verified successfully! 🎉',
+            'message' => 'Verification successful! 🎉',
         ];
     }
 

@@ -24,6 +24,8 @@ class SchoolOwnerAuthController extends Controller
 
     public function register(Request $request)
     {
+        $verifyChannel = $request->input('verify_channel', 'email'); // 'email' or 'whatsapp'
+
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email',
@@ -31,9 +33,10 @@ class SchoolOwnerAuthController extends Controller
             'phone'    => 'required|string|max:20',
             'otp'      => 'required|string|size:6',
         ], [
+            'name.required'      => '⚠️ Please enter your full name.',
             'email.unique'       => '⚠️ This email is already registered. Please sign in instead.',
             'email.email'        => '⚠️ Please enter a valid official email address.',
-            'phone.required'     => '⚠️ Principal / Administrator contact number is required.',
+            'phone.required'     => '⚠️ Contact mobile number is required.',
             'password.min'       => '⚠️ Password must be at least 6 characters.',
             'password.confirmed' => '⚠️ Password confirmation does not match.',
             'otp.required'       => '⚠️ 6-digit verification code is required. Please click "Get OTP".',
@@ -54,8 +57,11 @@ class SchoolOwnerAuthController extends Controller
             return back()->withInput()->withErrors(['phone' => '⚠️ Please enter a valid 10-digit mobile number.']);
         }
 
+        // Determine verification identifier based on selected channel
+        $identifier = ($verifyChannel === 'whatsapp') ? $cleanedPhone : $email;
+
         // Verify OTP
-        $otpCheck = AuthOtp::checkAndVerify($email, $request->otp, 'register');
+        $otpCheck = AuthOtp::checkAndVerify($identifier, $request->otp, 'register');
         if (!$otpCheck['valid']) {
             if ($request->expectsJson() || $request->ajax()) {
                 return response()->json([
@@ -67,15 +73,18 @@ class SchoolOwnerAuthController extends Controller
         }
 
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $email,
-            'phone'    => $request->phone,
-            'password' => Hash::make($request->password),
+            'name'              => $request->name,
+            'email'             => $email,
+            'phone'             => $request->phone,
+            'email_verified_at' => now(),
+            'password'          => Hash::make($request->password),
         ]);
 
         $user->assignRole('school_owner');
         Auth::login($user, true);
-        $request->session()->regenerate();
+        if ($request->hasSession()) {
+            $request->session()->regenerate();
+        }
 
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([

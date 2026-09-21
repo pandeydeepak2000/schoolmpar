@@ -26,90 +26,128 @@ class AuthController extends Controller
     }
 
     /**
-     * Send OTP to Gmail/Email for account creation or verification
+     * Send OTP to Email or WhatsApp for account creation or verification
      */
     public function sendOtp(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'name'  => 'nullable|string|max:255',
-            'type'  => 'nullable|string|in:register,login,reset_password',
-        ], [
-            'email.required' => 'Please enter your email address.',
-            'email.email'    => 'Please enter a valid email address (e.g. yourname@gmail.com).',
-        ]);
+        $channel = $request->input('channel', 'email'); // 'email' or 'whatsapp'
+        $type    = $request->input('type', 'register');
+        $name    = $request->input('name', 'User');
 
-        $email = strtolower(trim($request->email));
-        $type  = $request->input('type', 'register');
+        if ($channel === 'whatsapp') {
+            $request->validate([
+                'phone' => 'required|string|min:10|max:20',
+            ], [
+                'phone.required' => '⚠️ Please enter your 10-digit WhatsApp mobile number.',
+                'phone.min'      => '⚠️ Please enter a valid 10-digit mobile number.',
+            ]);
 
-        // If registration, ensure email is not already registered
-        if ($type === 'register') {
-            if (User::where('email', $email)->exists()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => '⚠️ This email is already registered. Please sign in to your existing account.',
-                ], 422);
-            }
-        }
-
-        // Validate 10-digit mobile number if provided
-        if ($request->filled('phone')) {
-            $cleanedPhone = preg_replace('/[^0-9]/', '', $request->phone);
-            if (strlen($cleanedPhone) < 10) {
+            $cleanPhone = preg_replace('/[^0-9]/', '', $request->phone);
+            if (strlen($cleanPhone) < 10) {
                 return response()->json([
                     'success' => false,
                     'message' => '⚠️ Please enter a valid 10-digit mobile number.',
                 ], 422);
             }
+
+            // Check if phone number is already registered if registering
+            if ($type === 'register' && User::where('phone', $cleanPhone)->exists()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => '⚠️ This mobile number is already registered. Please sign in instead.',
+                ], 422);
+            }
+
+            // Generate 6-digit OTP for phone
+            $otp = AuthOtp::generate($cleanPhone, $type, 'whatsapp', 10);
+
+            // Send via Vextro WhatsApp API
+            \App\Services\VextroWhatsAppService::sendOtp($cleanPhone, $otp, 'Registration');
+
+            return response()->json([
+                'success'  => true,
+                'channel'  => 'whatsapp',
+                'message'  => "✅ 6-digit OTP sent to WhatsApp number (+91 {$cleanPhone})! Please check your WhatsApp messages.",
+                'demo_otp' => config('app.debug') ? $otp : null,
+            ]);
         }
 
-        // Generate 6-digit OTP
+        // Default: Email channel
+        $request->validate([
+            'email' => 'required|email|max:255',
+        ], [
+            'email.required' => '⚠️ Please enter your email address.',
+            'email.email'    => '⚠️ Please enter a valid email address (e.g. yourname@gmail.com).',
+        ]);
+
+        $email = strtolower(trim($request->email));
+
+        // If registration, ensure email is not already registered
+        if ($type === 'register' && User::where('email', $email)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => '⚠️ This email is already registered. Please sign in to your existing account.',
+            ], 422);
+        }
+
+        // Generate 6-digit OTP for email
         $otp = AuthOtp::generate($email, $type, 'email', 10);
 
-        // Send OTP via Email using dynamic DB SMTP settings
         try {
             \App\Services\DynamicMailConfig::apply();
 
             Mail::to($email)->send(new AuthOtpMail(
                 otp: $otp,
                 email: $email,
-                name: $request->name,
+                name: $name,
                 purpose: ($type === 'register' ? 'Account Registration' : 'Verification')
             ));
 
             return response()->json([
                 'success' => true,
-                'message' => "✅ Verification code sent to {$email}! Please check your Gmail/Inbox (and spam folder).",
+                'channel' => 'email',
+                'message' => "✅ 6-digit OTP sent to {$email}! Please check your Gmail/Inbox (and spam folder).",
             ]);
         } catch (\Throwable $e) {
             Log::error('OTP email failed to send: ' . $e->getMessage());
 
-            // In local/demo mode if mail server fails, still allow OTP testing
             return response()->json([
-                'success' => true,
-                'message' => "✅ Verification code generated! (Demo code: {$otp})",
+                'success'  => true,
+                'channel'  => 'email',
+                'message'  => "✅ Verification code generated for {$email}!",
                 'demo_otp' => config('app.debug') ? $otp : null,
             ]);
         }
     }
 
     /**
-     * Complete Registration with OTP verification
+     * Complete Registration with Email or WhatsApp OTP verification
      */
     public function register(Request $request)
     {
-        $request->validate([
+        $verifyChannel = $request->input('verify_channel', 'email'); // 'email' or 'whatsapp'
+
+        $rules = [
             'name'                 => 'required|string|max:255',
             'email'                => 'required|email|max:255|unique:users,email',
-            'phone'                => 'nullable|string|max:20',
             'password'             => 'required|min:6|confirmed',
             'otp'                  => 'required|string|size:6',
             'role'                 => 'nullable|in:parent,school_owner',
             'g-recaptcha-response' => [new \App\Rules\RecaptchaRule],
-        ], [
+        ];
+
+        if ($verifyChannel === 'whatsapp') {
+            $rules['phone'] = 'required|string|min:10|max:20';
+        } else {
+            $rules['phone'] = 'nullable|string|max:20';
+        }
+
+        $request->validate($rules, [
+            'name.required'      => '⚠️ Please enter your full name.',
+            'email.required'     => '⚠️ Email address is required.',
             'email.unique'       => '⚠️ This email address is already registered. Please sign in instead.',
             'email.email'        => '⚠️ Please enter a valid email address.',
+            'phone.required'     => '⚠️ WhatsApp mobile number is required for WhatsApp verification.',
             'password.min'       => '⚠️ Password must be at least 6 characters long.',
             'password.confirmed' => '⚠️ Password confirmation does not match.',
             'otp.required'       => '⚠️ 6-digit verification code is required. Please click "Get OTP".',
@@ -117,23 +155,13 @@ class AuthController extends Controller
         ]);
 
         $email = strtolower(trim($request->email));
+        $phone = $request->filled('phone') ? preg_replace('/[^0-9]/', '', $request->phone) : null;
 
-        // Validate 10-digit mobile number if provided
-        if ($request->filled('phone')) {
-            $cleanedPhone = preg_replace('/[^0-9]/', '', $request->phone);
-            if (strlen($cleanedPhone) < 10) {
-                if ($request->expectsJson() || $request->ajax()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => '⚠️ Please enter a valid 10-digit mobile number.',
-                    ], 422);
-                }
-                return back()->withInput()->withErrors(['phone' => '⚠️ Please enter a valid 10-digit mobile number.']);
-            }
-        }
+        // Determine verification identifier based on selected channel
+        $identifier = ($verifyChannel === 'whatsapp') ? $phone : $email;
 
         // Verify OTP
-        $otpCheck = AuthOtp::checkAndVerify($email, $request->otp, 'register');
+        $otpCheck = AuthOtp::checkAndVerify($identifier, $request->otp, 'register');
         if (!$otpCheck['valid']) {
             if ($request->expectsJson() || $request->ajax()) {
                 return response()->json([
@@ -145,16 +173,17 @@ class AuthController extends Controller
         }
 
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $email,
-            'phone'    => $request->phone,
-            'password' => Hash::make($request->password),
+            'name'              => $request->name,
+            'email'             => $email,
+            'phone'             => $phone,
+            'email_verified_at' => now(),
+            'password'          => Hash::make($request->password),
         ]);
 
         $role = ($request->role === 'school_owner') ? 'school_owner' : 'parent';
         $user->assignRole($role);
 
-        // Send Welcome Mail from support@schoolmapr.com
+        // Send Welcome Mail if mail available
         try {
             Mail::to($user->email)->send(new WelcomeParentMail($user));
         } catch (\Throwable $e) {
@@ -162,7 +191,9 @@ class AuthController extends Controller
         }
 
         Auth::login($user, true);
-        $request->session()->regenerate();
+        if ($request->hasSession()) {
+            $request->session()->regenerate();
+        }
 
         $redirectUrl = ($role === 'school_owner')
             ? route('school-owner.dashboard')

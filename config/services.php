@@ -42,11 +42,10 @@ return [
         'site_key'   => env('RECAPTCHA_SITE_KEY', ''),
         'secret_key' => env('RECAPTCHA_SECRET_KEY', ''),
     ],
-    'slack' => [
-        'notifications' => [
-            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
-        ],
+    'vextro' => [
+        'api_key'      => env('VEXTRO_API_KEY', 'vx_e3cb9718f7ec91f50b8e3b18004e67da35e9fe393b1f202a7b65bf7f1513729c'),
+        'whatsapp_id'  => env('VEXTRO_WHATSAPP_ID', '01a0b8c7-f10c-77e1-b8d6-499ea6f80a85'),
+        'wa_number_id' => env('VEXTRO_WA_NUMBER_ID', '1438181896034122'),
+        'waba_id'      => env('VEXTRO_WABA_ID', '2159680121246973'),
     ],
-
 ];
