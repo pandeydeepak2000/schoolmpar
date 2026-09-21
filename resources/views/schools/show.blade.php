@@ -1029,7 +1029,7 @@
                     <div class="hero-btn-group">
                         @auth
                             @if($adm==='open')
-                                <a href="{{ route('admission.create',$school->slug) }}" class="hero-btn hero-btn-primary">🎓 Apply Now</a>
+                                <a href="{{ route('admission.create',$school->slug) }}" class="hero-btn hero-btn-primary" style="background:linear-gradient(135deg, #febb02, #f59e0b);color:#0f2d59;font-weight:800;border:none;box-shadow:0 4px 14px rgba(254,187,2,0.45);">⚡ Apply for Admission</a>
                             @elseif($adm==='coming_soon')
                                 <button class="hero-btn" style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;cursor:not-allowed;" title="Admission will open soon">🟡 Opening Soon</button>
                             @else
@@ -1037,7 +1037,7 @@
                             @endif
                         @else
                             @if($adm==='open')
-                                <a href="{{ route('login') }}" class="hero-btn hero-btn-primary">🎓 Apply Now</a>
+                                <a href="{{ route('login') }}?redirect={{ urlencode(route('admission.create', $school->slug)) }}" class="hero-btn hero-btn-primary" style="background:linear-gradient(135deg, #febb02, #f59e0b);color:#0f2d59;font-weight:800;border:none;box-shadow:0 4px 14px rgba(254,187,2,0.45);">⚡ Apply for Admission</a>
                             @elseif($adm==='coming_soon')
                                 <a href="{{ route('login') }}" class="hero-btn" style="background:#fef3c7;color:#92400e;border:1px solid #fde68a;">🟡 Opening Soon</a>
                             @else
@@ -1416,6 +1416,40 @@
             <div class="col-lg-4">
                 <div class="show-sticky">
 
+                    {{-- Dedicated Online Admission Action Card (Above Fee Structure) --}}
+                    @if($adm === 'open')
+                        <div class="sticky-box" style="background: linear-gradient(135deg, #0f2d59 0%, #1e3a8a 100%); color:#fff; border:none; margin-bottom:16px; box-shadow:0 8px 24px rgba(15,45,89,0.18);">
+                            <div style="padding: 18px 20px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                                    <span style="background:#10b981; color:#fff; font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; letter-spacing:0.5px; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px;">
+                                        ● Admissions Open
+                                    </span>
+                                    <span style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Session 2026-27</span>
+                                </div>
+                                <h3 style="color:#fff; font-weight:800; font-size:16.5px; margin:0 0 6px 0;">⚡ Direct School Admission</h3>
+                                <p style="color:rgba(255,255,255,0.85); font-size:12.5px; margin:0 0 14px 0; line-height:1.45;">
+                                    Submit your child's admission inquiry directly to {{ $school->name }} for prompt review & verified seat booking.
+                                </p>
+                                @auth
+                                    <a href="{{ route('admission.create', $school->slug) }}" class="side-btn" style="background:#febb02; color:#0f2d59; font-weight:800; font-size:14.5px; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; border:none; box-shadow:0 4px 12px rgba(254,187,2,0.35); padding:12px;">
+                                        <span>Apply for Admission Online</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}?redirect={{ urlencode(route('admission.create', $school->slug)) }}" class="side-btn" style="background:#febb02; color:#0f2d59; font-weight:800; font-size:14.5px; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; border:none; box-shadow:0 4px 12px rgba(254,187,2,0.35); padding:12px;">
+                                        <span>Apply for Admission Online</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                @endauth
+                            </div>
+                        </div>
+                    @elseif($adm === 'coming_soon')
+                        <div class="sticky-box" style="background:#fef3c7; border:1px solid #fde68a; margin-bottom:16px; padding:16px 20px;">
+                            <div style="font-weight:800; color:#92400e; font-size:14px; margin-bottom:4px;">🟡 Admissions Opening Soon</div>
+                            <div style="color:#b45309; font-size:12px;">Session 2026-27 admission forms will be available shortly on SchoolMapr.</div>
+                        </div>
+                    @endif
+
                     <div class="sticky-box">
                         <div class="fee-box-head">💳 Transparent Fee Structure</div>
                         <div class="fee-box-body">
@@ -1440,23 +1474,9 @@
                                 </div>
                                 @endif
 
-                                <div class="fee-lock-box" style="background:#f0fdf4;border-color:#bbf7d0;color:#166534;">
-                                    ✓ Verified by SchoolMapr team in Patna. No hidden registration surcharges.
+                                <div class="fee-lock-box" style="background:#f0fdf4;border-color:#bbf7d0;color:#166534;margin-top:10px;">
+                                    ✓ Verified by SchoolMapr team in Patna. Zero hidden registration surcharges.
                                 </div>
-
-                                @if($adm === 'open')
-                                    <a href="{{ route('admission.create', $school->slug) }}" class="side-btn side-btn-yellow" style="text-decoration:none;">
-                                        ⚡ Apply for Admission Online
-                                    </a>
-                                @elseif($adm === 'coming_soon')
-                                    <button class="side-btn" style="background:#fef3c7; color:#92400e; border:1px solid #fde68a; cursor:not-allowed;" title="Admissions opening soon">
-                                        🟡 Admissions Opening Soon
-                                    </button>
-                                @else
-                                    <button class="side-btn" style="background:#fee2e2; color:#991b1b; border:1px solid #fecaca; cursor:not-allowed;" title="Admissions closed">
-                                        🚫 Admissions Closed
-                                    </button>
-                                @endif
                             @else
                                 <div class="fee-lock-box" style="margin-top:0;background:#f8fafc;border-color:#cbd5e1;color:#475569;">
                                     🔒 <strong>Fee Structure Protected:</strong> Sign in to view verified annual tuition, admission fees, and transport breakup for {{ $school->name }}.
