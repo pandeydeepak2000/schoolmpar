@@ -131,7 +131,7 @@ class VextroWhatsAppService
                 'success'         => false,
                 'not_on_whatsapp' => true,
                 'suggest_email'   => true,
-                'message'         => '⚠️ WhatsApp OTP abhi deliver nahi ho sakta (Template Meta se approved nahi hai). Kripya Email OTP se verify karein.',
+                'message'         => '⚠️ WhatsApp OTP delivery is temporarily unavailable (Meta template pending review). Please verify using Email OTP.',
             ];
         }
 
@@ -154,6 +154,7 @@ class VextroWhatsAppService
                 $params['buttons'] = [[(string)$otp]];
             }
 
+            $idempotencyKey = 'otp-' . $formattedPhone . '-' . time();
             $response = Http::timeout(10)
                 ->withHeaders([
                     'Authorization'   => 'Bearer ' . $apiKey,
@@ -187,7 +188,7 @@ class VextroWhatsAppService
                 'success'         => false,
                 'not_on_whatsapp' => true,
                 'suggest_email'   => true,
-                'message'         => '⚠️ Yeh number WhatsApp par active nahi hai ya WhatsApp OTP deliver nahi ho saka. Kripya Email OTP ka upyog karke verify karein.',
+                'message'         => '⚠️ This mobile number could not receive WhatsApp OTP (or is not active on WhatsApp). Please verify using Email OTP.',
             ];
         } catch (\Throwable $e) {
             Log::error('Vextro template send exception: ' . $e->getMessage());
@@ -196,7 +197,7 @@ class VextroWhatsAppService
                 'success'         => false,
                 'not_on_whatsapp' => true,
                 'suggest_email'   => true,
-                'message'         => '⚠️ WhatsApp service temporarily unreachable. Kripya Email OTP ka upyog karein.',
+                'message'         => '⚠️ WhatsApp service is temporarily unreachable. Please verify using Email OTP.',
             ];
         }
     }

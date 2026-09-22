@@ -207,6 +207,33 @@
             box-shadow: 0 0 0 3.5px rgba(15, 45, 89, 0.12);
         }
 
+        /* PASSWORD EYE TOGGLE */
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-input-wrapper .form-input {
+            padding-right: 42px !important;
+        }
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+        .password-toggle-btn:hover {
+            color: var(--navy);
+        }
+
         /* OTP SECTION STYLING */
         .verify-channel-selector {
             display: flex;
@@ -419,11 +446,21 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Password <span style="color:#ef4444;">*</span></label>
-                        <input type="password" id="regPassword" name="password" class="form-input" placeholder="Min. 6 characters" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="regPassword" name="password" class="form-input" placeholder="Min. 6 characters" required>
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('regPassword', this)" title="Show / Hide Password" tabindex="-1">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Confirm Password <span style="color:#ef4444;">*</span></label>
-                        <input type="password" id="regPasswordConfirm" name="password_confirmation" class="form-input" placeholder="Repeat password" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="regPasswordConfirm" name="password_confirmation" class="form-input" placeholder="Repeat password" required>
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('regPasswordConfirm', this)" title="Show / Hide Password" tabindex="-1">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -642,7 +679,7 @@
                     if (activeChannel === 'whatsapp' || data.suggest_email) {
                         setTimeout(() => {
                             setVerificationChannel('email');
-                            showError((data.message || '⚠️ WhatsApp OTP delivery failed.') + '<br><span style="font-weight:700; color:#1d4ed8; display:block; margin-top:4px;">👉 We have switched you to Email OTP. Please click "Get Email OTP" below.</span>');
+                            showError((data.message || '⚠️ WhatsApp OTP delivery is temporarily unavailable.') + '<br><span style="font-weight:700; color:#1d4ed8; display:block; margin-top:4px;">👉 We have switched you to Email OTP. Please click "Get Email OTP" below.</span>');
                             document.getElementById('regEmail').focus();
                         }, 1500);
                     }
@@ -721,6 +758,21 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Your Account...';
         });
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
     </script>
 
 </body>

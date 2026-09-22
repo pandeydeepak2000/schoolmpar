@@ -69,7 +69,7 @@ class AuthController extends Controller
                     'success'       => false,
                     'channel'       => 'whatsapp',
                     'suggest_email' => true,
-                    'message'       => $res['message'] ?? '⚠️ Yeh number WhatsApp par active nahi hai ya OTP deliver nahi ho paya. Kripya Email OTP ka upyog karein.',
+                    'message'       => $res['message'] ?? '⚠️ WhatsApp OTP delivery is temporarily unavailable. Please verify using Email OTP.',
                 ], 422);
             }
 

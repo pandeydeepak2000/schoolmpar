@@ -201,6 +201,33 @@
             box-shadow: 0 0 0 3.5px rgba(15, 45, 89, 0.12);
         }
 
+        /* PASSWORD EYE TOGGLE */
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-input-wrapper .form-input {
+            padding-right: 42px !important;
+        }
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+        .password-toggle-btn:hover {
+            color: var(--navy);
+        }
+
         .remember-row {
             display: flex;
             justify-content: space-between;
@@ -333,7 +360,12 @@
                 
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="loginPassword" name="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('loginPassword', this)" title="Show / Hide Password" tabindex="-1">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="remember-row">
@@ -372,5 +404,21 @@
         </div>
     </div>
 
+    <script>
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>
