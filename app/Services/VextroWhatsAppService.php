@@ -137,10 +137,22 @@ class VextroWhatsAppService
 
         // Try sending via Meta Template Message (Standard WhatsApp Business OTP)
         try {
-            $idempotencyKey = 'otp-' . $formattedPhone . '-' . time();
+            $hasButtons = false;
+            if (!empty($approvedTemplate['components'])) {
+                foreach ($approvedTemplate['components'] as $comp) {
+                    if (($comp['type'] ?? '') === 'BUTTONS') {
+                        $hasButtons = true;
+                        break;
+                    }
+                }
+            }
+
             $params = [
                 'body' => [(string)$otp],
             ];
+            if ($hasButtons) {
+                $params['buttons'] = [[(string)$otp]];
+            }
 
             $response = Http::timeout(10)
                 ->withHeaders([
