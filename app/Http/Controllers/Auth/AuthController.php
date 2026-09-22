@@ -62,12 +62,21 @@ class AuthController extends Controller
             $otp = AuthOtp::generate($cleanPhone, $type, 'whatsapp', 10);
 
             // Send via Vextro WhatsApp API
-            \App\Services\VextroWhatsAppService::sendOtp($cleanPhone, $otp, 'Registration');
+            $res = \App\Services\VextroWhatsAppService::sendOtp($cleanPhone, $otp, 'Registration');
+
+            if (!$res['success']) {
+                return response()->json([
+                    'success'       => false,
+                    'channel'       => 'whatsapp',
+                    'suggest_email' => true,
+                    'message'       => $res['message'] ?? '⚠️ Yeh number WhatsApp par active nahi hai ya OTP deliver nahi ho paya. Kripya Email OTP ka upyog karein.',
+                ], 422);
+            }
 
             return response()->json([
                 'success'  => true,
                 'channel'  => 'whatsapp',
-                'message'  => "✅ 6-digit OTP sent to WhatsApp number (+91 {$cleanPhone})! Please check your WhatsApp messages.",
+                'message'  => $res['message'] ?? "✅ 6-digit OTP sent to WhatsApp number (+91 {$cleanPhone})! Please check your WhatsApp messages.",
                 'demo_otp' => config('app.debug') ? $otp : null,
             ]);
         }

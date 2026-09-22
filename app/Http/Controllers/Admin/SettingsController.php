@@ -132,7 +132,11 @@ class SettingsController extends Controller
 
             return back()->with('success', '🎉 Test email sent successfully to ' . $request->test_email . ' from ' . $fromAddress . '!');
         } catch (\Throwable $e) {
-            return back()->with('error', '❌ Mail delivery failed: ' . $e->getMessage());
+            $errorMsg = $e->getMessage();
+            if (str_contains(strtolower($errorMsg), 'sendmail')) {
+                $errorMsg .= ' (Tip: On cPanel hosting, select "SMTP Server" as Mail Driver instead of "Sendmail", enter your password and click Save Mail Settings).';
+            }
+            return back()->with('error', '❌ Mail delivery failed: ' . $errorMsg);
         }
     }
 }

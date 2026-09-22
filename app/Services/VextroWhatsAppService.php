@@ -53,6 +53,53 @@ class VextroWhatsAppService
     }
 
     /**
+     * Fetch approved templates from Vextro (cached for 2 minutes)
+     */
+    public static function getApprovedTemplate(): ?array
+    {
+        $apiKey = self::getApiKey();
+        $waNumberId = self::getWaNumberId();
+        $wabaId = self::getWabaId();
+
+        if (empty($apiKey) || empty($waNumberId) || empty($wabaId)) {
+            return null;
+        }
+
+        try {
+            return \Illuminate\Support\Facades\Cache::remember('vextro_approved_otp_template', 120, function () use ($apiKey, $waNumberId, $wabaId) {
+                $response = Http::timeout(6)
+                    ->withHeaders([
+                        'Authorization' => 'Bearer ' . $apiKey,
+                        'Content-Type'  => 'application/json',
+                    ])
+                    ->post('https://api.vextro.net/public/v1/api/sync-templates', [
+                        'waNumberId' => $waNumberId,
+                        'wabaId'     => $wabaId,
+                    ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $templates = $data['templates'] ?? [];
+
+                    foreach ($templates as $tmpl) {
+                        if (($tmpl['status'] ?? '') === 'APPROVED') {
+                            return [
+                                'name'       => $tmpl['name'],
+                                'language'   => $tmpl['language'] ?? 'en_US',
+                                'components' => $tmpl['components'] ?? [],
+                            ];
+                        }
+                    }
+                }
+                return null;
+            });
+        } catch (\Throwable $e) {
+            Log::warning('Error fetching Vextro templates: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Send OTP via Vextro WhatsApp API
      */
     public static function sendOtp(string $phone, string $otp, string $purpose = 'Registration'): array
@@ -60,19 +107,41 @@ class VextroWhatsAppService
         $formattedPhone = self::formatPhone($phone);
         $apiKey = self::getApiKey();
         $whatsappId = self::getWhatsappId();
-        $templateName = env('VEXTRO_OTP_TEMPLATE', 'otp_verification');
 
-        if (empty($apiKey)) {
-            Log::warning('Vextro API Key missing.');
+        if (empty($apiKey) || empty($whatsappId)) {
+            Log::warning('Vextro WhatsApp configuration missing.');
             return [
-                'success' => false,
-                'message' => 'WhatsApp messaging service is not configured.',
+                'success'         => false,
+                'suggest_email'   => true,
+                'message'         => '⚠️ WhatsApp OTP service abhi configure nahi hai. Kripya Email OTP ka upyog karein.',
             ];
         }
 
-        // 1. Try sending via Meta Template Message (Standard WhatsApp Business OTP)
+        // Check for an approved template in Vextro / Meta
+        $approvedTemplate = self::getApprovedTemplate();
+
+        // Default template fallback if configured in env
+        $templateName = $approvedTemplate['name'] ?? env('VEXTRO_OTP_TEMPLATE', 'otp');
+        $templateLang = $approvedTemplate['language'] ?? 'en_US';
+
+        // If we know all templates are rejected / not approved, inform user to use Email OTP
+        if (!$approvedTemplate && !env('VEXTRO_FORCE_TEMPLATE')) {
+            Log::warning("No APPROVED template found on Vextro. Current templates might be pending or rejected by Meta.");
+            return [
+                'success'         => false,
+                'not_on_whatsapp' => true,
+                'suggest_email'   => true,
+                'message'         => '⚠️ WhatsApp OTP abhi deliver nahi ho sakta (Template Meta se approved nahi hai). Kripya Email OTP se verify karein.',
+            ];
+        }
+
+        // Try sending via Meta Template Message (Standard WhatsApp Business OTP)
         try {
             $idempotencyKey = 'otp-' . $formattedPhone . '-' . time();
+            $params = [
+                'body' => [(string)$otp],
+            ];
+
             $response = Http::timeout(10)
                 ->withHeaders([
                     'Authorization'   => 'Bearer ' . $apiKey,
@@ -84,62 +153,39 @@ class VextroWhatsAppService
                     'to'         => $formattedPhone,
                     'template'   => [
                         'name'     => $templateName,
-                        'language' => 'en',
+                        'language' => $templateLang,
                     ],
-                    'params'     => [
-                        'body'    => [$otp],
-                        'buttons' => [[$otp]],
-                    ],
+                    'params'     => $params,
                 ]);
 
             if ($response->successful() || $response->status() === 202) {
                 Log::info("WhatsApp OTP sent successfully to {$formattedPhone} via Vextro template.");
                 return [
                     'success' => true,
-                    'message' => "✅ OTP sent to WhatsApp number +{$formattedPhone}!",
+                    'message' => "✅ 6-digit OTP sent to WhatsApp number (+{$formattedPhone})! Please check your WhatsApp messages.",
                     'data'    => $response->json(),
                 ];
             }
 
-            Log::warning("Vextro template send returned {$response->status()}: " . $response->body());
+            $body = $response->body();
+            Log::warning("Vextro template send failed (Status {$response->status()}): " . $body);
+
+            // Check if rejected/not on WhatsApp
+            return [
+                'success'         => false,
+                'not_on_whatsapp' => true,
+                'suggest_email'   => true,
+                'message'         => '⚠️ Yeh number WhatsApp par active nahi hai ya WhatsApp OTP deliver nahi ho saka. Kripya Email OTP ka upyog karke verify karein.',
+            ];
         } catch (\Throwable $e) {
             Log::error('Vextro template send exception: ' . $e->getMessage());
+
+            return [
+                'success'         => false,
+                'not_on_whatsapp' => true,
+                'suggest_email'   => true,
+                'message'         => '⚠️ WhatsApp service temporarily unreachable. Kripya Email OTP ka upyog karein.',
+            ];
         }
-
-        // 2. Try sending via Direct Message / Notification endpoint
-        try {
-            $response = Http::timeout(10)
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $apiKey,
-                    'Content-Type'  => 'application/json',
-                ])
-                ->post('https://api.vextro.net/public/v1/api/send-message/message', [
-                    'type'        => 'message',
-                    'waNumberId'  => self::getWaNumberId(),
-                    'wabaId'      => self::getWabaId(),
-                    'to_number'   => $formattedPhone,
-                    'body'        => "Your SchoolMapr {$purpose} verification code is: *{$otp}*.\n\nValid for 10 minutes. Please do not share this OTP with anyone.",
-                ]);
-
-            if ($response->successful()) {
-                Log::info("WhatsApp OTP sent to {$formattedPhone} via Vextro direct message.");
-                return [
-                    'success' => true,
-                    'message' => "✅ OTP sent to WhatsApp number +{$formattedPhone}!",
-                    'data'    => $response->json(),
-                ];
-            }
-
-            Log::warning("Vextro direct message returned {$response->status()}: " . $response->body());
-        } catch (\Throwable $e) {
-            Log::error('Vextro direct message exception: ' . $e->getMessage());
-        }
-
-        // Return fallback status
-        return [
-            'success' => true,
-            'message' => "✅ 6-digit OTP generated for +{$formattedPhone}! (Check your WhatsApp)",
-            'otp'     => config('app.debug') ? $otp : null,
-        ];
     }
 }

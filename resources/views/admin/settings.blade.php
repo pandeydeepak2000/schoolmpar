@@ -74,10 +74,13 @@
                     Mail Driver *
                 </label>
                 <select name="mail_mailer" style="width:100%; border:1.5px solid #cbd5e1; border-radius:8px; padding:8px 12px; font-size:13px; outline:none; box-sizing:border-box; background:#fff;">
-                    <option value="log" {{ $mailMailer === 'log' ? 'selected' : '' }}>📄 Log Driver (Local Testing - writes to laravel.log)</option>
-                    <option value="smtp" {{ $mailMailer === 'smtp' ? 'selected' : '' }}>🌐 SMTP Server (Gmail / Hostinger / Mailgun / Postmark / Sendgrid)</option>
-                    <option value="sendmail" {{ $mailMailer === 'sendmail' ? 'selected' : '' }}>✉️ Sendmail (cPanel / Localhost)</option>
+                    <option value="smtp" {{ ($mailMailer === 'smtp' || empty($mailMailer)) ? 'selected' : '' }}>🌐 SMTP Server (Recommended for cPanel / Webmail / Gmail / Production)</option>
+                    <option value="log" {{ $mailMailer === 'log' ? 'selected' : '' }}>📄 Log Driver (Local Testing - writes to storage/logs/laravel.log)</option>
+                    <option value="sendmail" {{ $mailMailer === 'sendmail' ? 'selected' : '' }}>⚠️ Sendmail (CLI Only - Do NOT use on Shared cPanel)</option>
                 </select>
+                <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:8px 12px; margin-top:8px; font-size:11.5px; color:#1e40af; line-height:1.45;">
+                    <i class="fas fa-info-circle me-1"></i> <strong>cPanel Shared Hosting Note:</strong> Please select <strong>SMTP Server</strong> above. Shared hosting environments block background <code>sendmail</code> processes. Your SMTP Host (<code>{{ $mailHost ?: 'lu-shared02.cpanelplatform.com' }}</code>) and Port 465 (SSL) will only be used when <strong>SMTP Server</strong> is selected.
+                </div>
             </div>
 
             <div style="display:grid; grid-template-columns:2fr 1fr; gap:12px; margin-bottom:14px;">

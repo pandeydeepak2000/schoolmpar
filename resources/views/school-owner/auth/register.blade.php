@@ -697,6 +697,15 @@
                     showPartnerError(data.message || 'Could not send verification code. Please check your details.');
                     btn.disabled = false;
                     btnText.innerText = partnerActiveChannel === 'whatsapp' ? 'Get WhatsApp OTP' : 'Get Email OTP';
+
+                    // If WhatsApp OTP failed or number not reachable on WhatsApp, prompt & switch to Email OTP
+                    if (partnerActiveChannel === 'whatsapp' || data.suggest_email) {
+                        setTimeout(() => {
+                            setPartnerVerificationChannel('email');
+                            showPartnerError((data.message || '⚠️ WhatsApp OTP delivery failed.') + '<br><span style="font-weight:700; color:#1d4ed8; display:block; margin-top:4px;">👉 We have switched you to Official Email OTP. Please click "Get Email OTP" below.</span>');
+                            document.getElementById('partnerEmail').focus();
+                        }, 1500);
+                    }
                 }
             } catch (err) {
                 showPartnerError('Network error while requesting verification code. Please try again.');
