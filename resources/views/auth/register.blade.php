@@ -468,6 +468,7 @@
                 <input type="hidden" name="verify_channel" id="verifyChannel" value="email">
 
                 <div class="otp-container" id="otpContainer">
+                    {{-- WhatsApp OTP commented out for now as requested (Email OTP active)
                     <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">
                         Choose Verification Method:
                     </div>
@@ -482,8 +483,9 @@
                             <span>WhatsApp OTP</span>
                         </div>
                     </div>
+                    --}}
 
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                         <div>
                             <div style="font-size:13px; font-weight:800; color:#0f2d59;" id="otpHeaderTitle">
                                 <i class="fa-solid fa-shield-halved text-primary me-1"></i> Email Verification Code
@@ -494,7 +496,7 @@
                         </div>
 
                         <button type="button" id="btnSendOtp" class="btn-otp-action" onclick="requestOtp()">
-                            <i class="fa-solid fa-paper-plane"></i> <span id="btnSendOtpText">Get OTP</span>
+                            <i class="fa-solid fa-paper-plane"></i> <span id="btnSendOtpText">Get Email OTP</span>
                         </button>
                     </div>
 
@@ -544,7 +546,7 @@
             <div style="margin-top:20px; padding:12px 14px; background:#f8fafc; border-radius:10px; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:space-around; text-align:center; font-size:11.5px; color:#475569; font-weight:600;">
                 <div><i class="fas fa-check-circle text-success me-1"></i> 100% Free</div>
                 <div style="width:1px; height:18px; background:#cbd5e1;"></div>
-                <div><i class="fab fa-whatsapp text-success me-1"></i> Fast WhatsApp OTP</div>
+                <div><i class="fas fa-envelope-circle-check text-primary me-1"></i> Instant Email OTP</div>
                 <div style="width:1px; height:18px; background:#cbd5e1;"></div>
                 <div><i class="fas fa-shield-alt text-primary me-1"></i> Patna Schools</div>
             </div>
@@ -555,34 +557,13 @@
         let countdownInterval = null;
         let activeChannel = 'email';
 
+        /* WhatsApp OTP channel switching commented out for now (Email OTP active)
         function setVerificationChannel(channel) {
             activeChannel = channel;
             document.getElementById('verifyChannel').value = channel;
-
-            const tabEmail = document.getElementById('tabEmail');
-            const tabWhatsapp = document.getElementById('tabWhatsapp');
-            const titleEl = document.getElementById('otpHeaderTitle');
-            const subEl = document.getElementById('otpHeaderSubtitle');
-            const btnText = document.getElementById('btnSendOtpText');
-            const phoneInput = document.getElementById('regPhone');
-
-            if (channel === 'whatsapp') {
-                tabEmail.classList.remove('active');
-                tabWhatsapp.classList.add('active');
-                titleEl.innerHTML = '<i class="fa-brands fa-whatsapp text-success me-1"></i> WhatsApp Verification Code';
-                subEl.innerText = 'A 6-digit OTP will be sent directly to your WhatsApp number.';
-                btnText.innerText = 'Get WhatsApp OTP';
-                phoneInput.setAttribute('required', 'required');
-                phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                tabWhatsapp.classList.remove('active');
-                tabEmail.classList.add('active');
-                titleEl.innerHTML = '<i class="fa-solid fa-shield-halved text-primary me-1"></i> Email Verification Code';
-                subEl.innerText = 'A 6-digit OTP will be sent to your Gmail/Email inbox.';
-                btnText.innerText = 'Get Email OTP';
-                phoneInput.removeAttribute('required');
-            }
+            ...
         }
+        */
 
         function showError(msg) {
             const errEl = document.getElementById('dynamicErrorAlert');
@@ -612,19 +593,12 @@
             const email = document.getElementById('regEmail').value.trim();
             const phone = document.getElementById('regPhone').value.trim();
 
+            /* WhatsApp validation commented out for now
             if (activeChannel === 'whatsapp') {
-                if (!phone) {
-                    showError('Please enter your 10-digit mobile number to receive the WhatsApp OTP.');
-                    document.getElementById('regPhone').focus();
-                    return;
-                }
-                const cleanedPhone = phone.replace(/[^0-9]/g, '');
-                if (cleanedPhone.length < 10) {
-                    showError('Please enter a valid 10-digit WhatsApp mobile number.');
-                    document.getElementById('regPhone').focus();
-                    return;
-                }
-            } else {
+                if (!phone) { ... }
+            } else
+            */
+            {
                 if (!email) {
                     showError('Please enter your email address to receive the verification code.');
                     document.getElementById('regEmail').focus();
@@ -652,7 +626,7 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        channel: activeChannel,
+                        channel: 'email',
                         email: email,
                         name: name,
                         phone: phone,
@@ -673,21 +647,12 @@
                 } else {
                     showError(data.message || 'Could not send verification code. Please check your details.');
                     btn.disabled = false;
-                    btnText.innerText = activeChannel === 'whatsapp' ? 'Get WhatsApp OTP' : 'Get Email OTP';
-
-                    // If WhatsApp OTP failed or number not reachable on WhatsApp, prompt & switch to Email OTP
-                    if (activeChannel === 'whatsapp' || data.suggest_email) {
-                        setTimeout(() => {
-                            setVerificationChannel('email');
-                            showError((data.message || '⚠️ WhatsApp OTP delivery is temporarily unavailable.') + '<br><span style="font-weight:700; color:#1d4ed8; display:block; margin-top:4px;">👉 We have switched you to Email OTP. Please click "Get Email OTP" below.</span>');
-                            document.getElementById('regEmail').focus();
-                        }, 1500);
-                    }
+                    btnText.innerText = 'Get Email OTP';
                 }
             } catch (err) {
                 showError('Network error while requesting verification code. Please try again.');
                 btn.disabled = false;
-                btnText.innerText = activeChannel === 'whatsapp' ? 'Get WhatsApp OTP' : 'Get Email OTP';
+                btnText.innerText = 'Get Email OTP';
             }
         }
 
