@@ -27,13 +27,13 @@ class ActivityLog extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function record(string $action, string $description, ?string $entityType = null, ?int $entityId = null): self
+    public static function record(string $action, string $description, ?string $entityType = null, ?int $entityId = null, ?User $actor = null): self
     {
-        $user = Auth::user();
+        $user = $actor ?: Auth::user();
 
         return self::create([
             'user_id'     => $user?->id,
-            'user_name'   => $user?->name ?? 'Guest Visitor',
+            'user_name'   => $user?->name ?? 'System Guest',
             'role'        => $user?->role ?? ($user?->roles?->first()?->name ?? 'Public'),
             'action'      => $action,
             'description' => $description,
@@ -42,4 +42,5 @@ class ActivityLog extends Model
             'entity_id'   => $entityId,
         ]);
     }
+
 }

@@ -59,12 +59,12 @@
     <span style="font-size:10px; font-weight:800; color:#64748b; margin-right:6px; text-transform:uppercase; letter-spacing:.06em;">A–Z INDEX:</span>
     <a href="{{ route('admin.schools', request()->except('letter')) }}"
        style="padding:4px 10px; border-radius:6px; font-size:12px; font-weight:800; text-decoration:none;
-              background:{{ !request('letter') ? '#0f2d59' : '#f1f5f9' }};
+              background:{{ !request('letter') ? '#0f172a' : '#f1f5f9' }};
               color:{{ !request('letter') ? '#fff' : '#475569' }};">ALL</a>
     @foreach(range('A','Z') as $letter)
     <a href="{{ route('admin.schools', array_merge(request()->except('letter'), ['letter' => $letter])) }}"
        style="padding:4px 9px; border-radius:6px; font-size:12px; font-weight:700; text-decoration:none;
-              background:{{ request('letter') === $letter ? '#0f2d59' : '#f8fafc' }};
+              background:{{ request('letter') === $letter ? '#0f172a' : '#f8fafc' }};
               color:{{ request('letter') === $letter ? '#fff' : '#64748b' }};">{{$letter}}</a>
     @endforeach
 </div>
@@ -126,7 +126,7 @@
                     </select>
                 </div>
 
-                <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+                <button type="submit" style="background:#0f172a; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
                     <i class="fas fa-filter me-1"></i> Filter
                 </button>
 

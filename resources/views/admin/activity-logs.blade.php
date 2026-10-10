@@ -88,7 +88,7 @@
                     </select>
                 </div>
 
-                <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+                <button type="submit" style="background:#0f172a; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
                     <i class="fas fa-filter me-1"></i> Filter Logs
                 </button>
 
@@ -107,7 +107,7 @@
 <div class="panel">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-fingerprint" style="color:#0f2d59;"></i>
+            <i class="fas fa-fingerprint" style="color:#2563eb;"></i>
             Activity Audit Stream ({{ $logs->total() }})
         </div>
         <span style="font-size:11.5px; color:#64748b;">Live server timezone: IST (UTC+5:30)</span>
@@ -143,10 +143,12 @@
                                 $badgeStyle = 'background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe;';
                             } elseif (str_contains($act, 'payment') || str_contains($act, 'paid')) {
                                 $badgeStyle = 'background:#fef3c7; color:#d97706; border:1px solid #fde68a;';
-                            } elseif (str_contains($act, 'login') || str_contains($act, 'auth')) {
+                            } elseif (str_contains($act, 'login') || str_contains($act, 'auth') || str_contains($act, 'register')) {
                                 $badgeStyle = 'background:#eef2ff; color:#4f46e5; border:1px solid #c7d2fe;';
                             } elseif (str_contains($act, 'reject') || str_contains($act, 'ban') || str_contains($act, 'delete')) {
                                 $badgeStyle = 'background:#fef2f2; color:#dc2626; border:1px solid #fecaca;';
+                            } elseif (str_contains($act, 'clear_cache')) {
+                                $badgeStyle = 'background:#f0fdf4; color:#16a34a; border:1px solid #bbf7d0;';
                             }
                         @endphp
                         <span style="display:inline-block; font-size:11px; font-weight:800; padding:3px 9px; border-radius:6px; white-space:nowrap; {{ $badgeStyle }}">
@@ -157,7 +159,7 @@
                     {{-- Actor --}}
                     <td>
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <div style="width:26px; height:26px; background:#0f2d59; color:#fff; border-radius:50%; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                            <div style="width:26px; height:26px; background:#0f172a; color:#fff; border-radius:50%; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                                 {{ strtoupper(substr($log->user_name, 0, 1)) }}
                             </div>
                             <span style="font-weight:700; color:#1e293b; font-size:12.5px;">{{ $log->user_name }}</span>

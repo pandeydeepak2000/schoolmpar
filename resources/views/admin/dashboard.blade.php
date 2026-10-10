@@ -236,12 +236,12 @@
         </div>
 
         {{-- Quick Admin Actions Card --}}
-        <div style="background:linear-gradient(135deg, #0f2d59 0%, #1e40af 100%); border-radius:14px; padding:20px; color:#fff;">
+        <div style="background:linear-gradient(135deg, #0f172a 0%, #1e40af 100%); border-radius:14px; padding:20px; color:#fff;">
             <div style="font-size:14px; font-weight:800; margin-bottom:4px;">⚡ Quick Management Actions</div>
             <p style="font-size:12px; color:rgba(255,255,255,0.75); margin:0 0 16px;">Direct shortcuts for daily Patna school administration</p>
             
             <div style="display:flex; flex-direction:column; gap:8px;">
-                <a href="{{ route('admin.schools.crud.create') }}" style="background:#fff; color:#0f2d59; border-radius:8px; padding:10px 14px; font-size:12.5px; font-weight:800; text-decoration:none; display:flex; align-items:center; justify-content:space-between;">
+                <a href="{{ route('admin.schools.crud.create') }}" style="background:#fff; color:#0f172a; border-radius:8px; padding:10px 14px; font-size:12.5px; font-weight:800; text-decoration:none; display:flex; align-items:center; justify-content:space-between;">
                     <span>➕ Add New School Profile</span>
                     <i class="fas fa-chevron-right" style="font-size:11px;"></i>
                 </a>

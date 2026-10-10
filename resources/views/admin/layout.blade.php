@@ -502,7 +502,18 @@
             </div>
 
             <!-- Right Profile & Quick Actions -->
-            <div style="display:flex; align-items:center; gap:14px; flex-shrink:0;">
+            <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+                <form action="{{ route('admin.cache.clear') }}" method="POST" style="margin:0;" onsubmit="return confirm('Purge compiled views, routes, and application cache now?');">
+                    @csrf
+                    <button type="submit"
+                       title="Purge compiled views, route cache, and application cache"
+                       style="font-size:12px; color:#0f766e; background:#f0fdf4; border:1px solid #bbf7d0;
+                              font-weight:700; display:flex; align-items:center; gap:6px; white-space:nowrap;
+                              border-radius:7px; padding:5px 12px; cursor:pointer; transition:all 0.15s;">
+                        <i class="fas fa-bolt" style="font-size:11px; color:#16a34a;"></i>
+                        <span class="hide-xs">Purge Cache</span>
+                    </button>
+                </form>
                 <a href="/" target="_blank"
                    style="font-size:12px; color:#475569; text-decoration:none;
                           font-weight:600; display:flex; align-items:center; gap:6px; white-space:nowrap;
@@ -513,11 +524,11 @@
                 </a>
                 <div style="width:1px; height:20px; background:#e2e8f0;"></div>
                 <div style="width:34px; height:34px;
-                            background:linear-gradient(135deg,#0f2d59 0%, #2563eb 100%);
+                            background:linear-gradient(135deg,#0f172a 0%, #2563eb 100%);
                             border-radius:50%; display:flex; align-items:center;
                             justify-content:center; color:#fff; font-weight:800;
                             font-size:13px; flex-shrink:0;
-                            box-shadow:0 2px 6px rgba(15,45,89,0.22);">
+                            box-shadow:0 2px 6px rgba(15,23,42,0.18);">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
             </div>

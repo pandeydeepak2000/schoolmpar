@@ -146,9 +146,17 @@ class SchoolCrudController extends Controller
             'seats_available'      => $request->seats_available,
         ]);
 
+        \App\Models\ActivityLog::record(
+            'create_school',
+            "Administrator created new school: {$request->name} (Board: {$request->board})",
+            'School',
+            null
+        );
+
         return redirect()->route('admin.schools')
                          ->with('success', '✅ School added successfully to SchoolMapr!');
     }
+
 
     public function edit(School $schoolsManage)
     {
@@ -277,14 +285,32 @@ class SchoolCrudController extends Controller
             'seats_available'      => $request->seats_available,
         ]);
 
+        \App\Models\ActivityLog::record(
+            'update_school',
+            "Administrator updated school details for {$schoolsManage->name}",
+            'School',
+            $schoolsManage->id
+        );
+
         return redirect()->route('admin.schools')
                          ->with('success', '✅ School details and images updated successfully!');
     }
 
     public function destroy(School $schoolsManage)
     {
+        $schoolName = $schoolsManage->name;
+        $schoolId   = $schoolsManage->id;
         $schoolsManage->delete();
+
+        \App\Models\ActivityLog::record(
+            'delete_school',
+            "Administrator permanently deleted school: {$schoolName} (ID: #{$schoolId})",
+            'School',
+            $schoolId
+        );
+
         return redirect()->route('admin.schools')
                          ->with('success', '🗑️ School deleted successfully.');
     }
+
 }

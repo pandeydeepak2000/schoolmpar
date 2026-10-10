@@ -8,8 +8,10 @@ use App\Models\Enquiry;
 use App\Models\Admission;
 use App\Models\VisitBooking;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 
 class SchoolManageController extends Controller
 {
@@ -160,11 +162,20 @@ class SchoolManageController extends Controller
     // ─────────────────────────────────────────
     public function approve($id)
     {
-        School::findOrFail($id)->update([
+        $school = School::findOrFail($id);
+        $school->update([
             'status'      => 'approved',
             'is_active'   => true,
             'is_verified' => true,
         ]);
+
+        ActivityLog::record(
+            'approve_school',
+            "Administrator approved school '{$school->name}' (now live on platform)",
+            'School',
+            $school->id
+        );
+
         return back()->with('success', '✅ School approved & live!');
     }
 
@@ -173,10 +184,19 @@ class SchoolManageController extends Controller
     // ─────────────────────────────────────────
     public function reject($id)
     {
-        School::findOrFail($id)->update([
+        $school = School::findOrFail($id);
+        $school->update([
             'status'    => 'rejected',
             'is_active' => false,
         ]);
+
+        ActivityLog::record(
+            'reject_school',
+            "Administrator rejected school submission: {$school->name}",
+            'School',
+            $school->id
+        );
+
         return back()->with('success', '❌ School rejected.');
     }
 
@@ -195,6 +215,13 @@ class SchoolManageController extends Controller
             'is_active' => $newIsActive,
         ]);
 
+        ActivityLog::record(
+            'toggle_school',
+            "Administrator changed school '{$school->name}' status to " . ucfirst($newStatus),
+            'School',
+            $school->id
+        );
+
         return back()->with('success', 'School status updated to ' . ucfirst($newStatus) . '.');
     }
 
@@ -203,11 +230,24 @@ class SchoolManageController extends Controller
     // ─────────────────────────────────────────
     public function updateEnquiry($id)
     {
-        Enquiry::findOrFail($id)->update([
-            'status' => request('status'),
+        $enquiry = Enquiry::findOrFail($id);
+        $oldStatus = $enquiry->status;
+        $newStatus = request('status');
+
+        $enquiry->update([
+            'status' => $newStatus,
         ]);
+
+        ActivityLog::record(
+            'update_enquiry_status',
+            "Administrator updated enquiry #{$enquiry->id} ({$enquiry->parent_name}) status from '{$oldStatus}' to '{$newStatus}'",
+            'Enquiry',
+            $enquiry->id
+        );
+
         return back()->with('success', '✅ Enquiry status updated.');
     }
+
 
     // ─────────────────────────────────────────
     // Send Official Brochure / Admission Packet to Parent Email
@@ -287,6 +327,13 @@ class SchoolManageController extends Controller
 
         $school->update(['owner_id' => $user->id]);
 
+        ActivityLog::record(
+            'assign_owner',
+            "Administrator assigned new partner '{$user->name}' ({$user->email}) to school '{$school->name}'",
+            'School',
+            $school->id
+        );
+
         return back()->with('success',
             "✅ Owner assigned! Email: {$request->owner_email} | Password: School@123"
         );
@@ -297,22 +344,46 @@ class SchoolManageController extends Controller
     // ─────────────────────────────────────────
     public function approveAdmission($schoolId, $id)
     {
-        Admission::where('school_id', $schoolId)->findOrFail($id)
-            ->update(['status' => 'approved']);
+        $admission = Admission::where('school_id', $schoolId)->findOrFail($id);
+        $admission->update(['status' => 'approved']);
+
+        ActivityLog::record(
+            'approve_admission',
+            "Administrator approved admission #{$admission->id} for student '{$admission->student_name}'",
+            'Admission',
+            $admission->id
+        );
+
         return back()->with('success', '✅ Admission approved!');
     }
 
     public function rejectAdmission($schoolId, $id)
     {
-        Admission::where('school_id', $schoolId)->findOrFail($id)
-            ->update(['status' => 'rejected']);
+        $admission = Admission::where('school_id', $schoolId)->findOrFail($id);
+        $admission->update(['status' => 'rejected']);
+
+        ActivityLog::record(
+            'reject_admission',
+            "Administrator rejected admission application #{$admission->id} for '{$admission->student_name}'",
+            'Admission',
+            $admission->id
+        );
+
         return back()->with('success', '❌ Admission rejected.');
     }
 
     public function reviewAdmission($schoolId, $id)
     {
-        Admission::where('school_id', $schoolId)->findOrFail($id)
-            ->update(['status' => 'reviewing']);
+        $admission = Admission::where('school_id', $schoolId)->findOrFail($id);
+        $admission->update(['status' => 'reviewing']);
+
+        ActivityLog::record(
+            'review_admission',
+            "Administrator marked admission #{$admission->id} ('{$admission->student_name}') as under review",
+            'Admission',
+            $admission->id
+        );
+
         return back()->with('success', '🔍 Marked as under review.');
     }
 
@@ -321,25 +392,49 @@ class SchoolManageController extends Controller
     // ─────────────────────────────────────────
     public function confirmVisit($schoolId, $id)
     {
-        VisitBooking::where('school_id', $schoolId)->findOrFail($id)
-            ->update(['status' => 'confirmed']);
+        $visit = VisitBooking::where('school_id', $schoolId)->findOrFail($id);
+        $visit->update(['status' => 'confirmed']);
+
+        ActivityLog::record(
+            'confirm_visit',
+            "Administrator confirmed campus tour #{$visit->id} for '{$visit->visitor_name}'",
+            'VisitBooking',
+            $visit->id
+        );
+
         return back()->with('success', '✅ Visit confirmed!');
     }
 
     public function cancelVisit($schoolId, $id)
     {
-        VisitBooking::where('school_id', $schoolId)->findOrFail($id)
-            ->update([
-                'status'        => 'cancelled',
-                'cancel_reason' => 'Cancelled by admin',
-            ]);
+        $visit = VisitBooking::where('school_id', $schoolId)->findOrFail($id);
+        $visit->update([
+            'status'        => 'cancelled',
+            'cancel_reason' => 'Cancelled by admin',
+        ]);
+
+        ActivityLog::record(
+            'cancel_visit',
+            "Administrator cancelled campus visit #{$visit->id} for '{$visit->visitor_name}'",
+            'VisitBooking',
+            $visit->id
+        );
+
         return back()->with('success', '❌ Visit cancelled.');
     }
 
     public function completeVisit($schoolId, $id)
     {
-        VisitBooking::where('school_id', $schoolId)->findOrFail($id)
-            ->update(['status' => 'completed']);
+        $visit = VisitBooking::where('school_id', $schoolId)->findOrFail($id);
+        $visit->update(['status' => 'completed']);
+
+        ActivityLog::record(
+            'complete_visit',
+            "Administrator concluded campus tour #{$visit->id} for '{$visit->visitor_name}'",
+            'VisitBooking',
+            $visit->id
+        );
+
         return back()->with('success', '🏁 Visit marked as completed!');
     }
 }

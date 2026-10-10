@@ -148,6 +148,22 @@ Route::prefix('admin')
     Route::post('/visits/bulk-delete',    [DashboardController::class, 'bulkDeleteVisits'])->name('visits.bulk-delete');
     Route::get('/payments',        [DashboardController::class, 'payments'])->name('payments');
     Route::get('/logs',            [DashboardController::class, 'activityLogs'])->name('logs');
+    Route::post('/clear-cache', function () {
+        \Illuminate\Support\Facades\Artisan::call('view:clear');
+        \Illuminate\Support\Facades\Artisan::call('route:clear');
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+        \Illuminate\Support\Facades\Artisan::call('config:clear');
+
+        \App\Models\ActivityLog::record(
+            'clear_cache',
+            'Administrator cleared compiled views, routes, and application cache.',
+            'System',
+            null
+        );
+
+        return back()->with('success', '🚀 Application cache, compiled views, and route caches cleared successfully!');
+    })->name('cache.clear');
+
 
     // ── Schools List (SchoolManageController) ────────────
     // ⚠️ /schools/pending PEHLE hona chahiye /schools se — warna Laravel

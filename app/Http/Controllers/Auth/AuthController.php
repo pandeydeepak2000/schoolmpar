@@ -192,12 +192,21 @@ class AuthController extends Controller
         $role = ($request->role === 'school_owner') ? 'school_owner' : 'parent';
         $user->assignRole($role);
 
+        \App\Models\ActivityLog::record(
+            'register_user',
+            "New {$role} account registered: {$user->name} ({$user->email})",
+            'User',
+            $user->id,
+            $user
+        );
+
         // Send Welcome Mail if mail available
         try {
             Mail::to($user->email)->send(new WelcomeParentMail($user));
         } catch (\Throwable $e) {
             Log::warning('Welcome email could not be sent: ' . $e->getMessage());
         }
+
 
         Auth::login($user, true);
         if ($request->hasSession()) {
@@ -311,12 +320,21 @@ class AuthController extends Controller
             }
 
             if ($isNew) {
+                \App\Models\ActivityLog::record(
+                    'register_google',
+                    "New user registered via Google OAuth: {$user->name} ({$user->email})",
+                    'User',
+                    $user->id,
+                    $user
+                );
+
                 try {
                     Mail::to($user->email)->send(new WelcomeParentMail($user));
                 } catch (\Throwable $e) {
                     Log::warning('Welcome email could not be sent: ' . $e->getMessage());
                 }
             }
+
 
             Auth::login($user, true);
             request()->session()->regenerate();

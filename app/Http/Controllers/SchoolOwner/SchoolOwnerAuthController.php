@@ -81,10 +81,20 @@ class SchoolOwnerAuthController extends Controller
         ]);
 
         $user->assignRole('school_owner');
+
+        \App\Models\ActivityLog::record(
+            'register_school_owner',
+            "New school partner account registered: {$user->name} ({$user->email})",
+            'User',
+            $user->id,
+            $user
+        );
+
         Auth::login($user, true);
         if ($request->hasSession()) {
             $request->session()->regenerate();
         }
+
 
         if ($request->expectsJson() || $request->ajax()) {
             return response()->json([

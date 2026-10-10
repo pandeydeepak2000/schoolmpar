@@ -163,9 +163,17 @@ public function index()
             'is_active'        => false,
         ]);
 
+        \App\Models\ActivityLog::record(
+            'create_school',
+            "School partner submitted new school profile: {$request->name} (Pending Review)",
+            'School',
+            null
+        );
+
         return redirect()->route('school-owner.schools.index')
                          ->with('success', '✅ School submitted to SchoolMapr! It will go live after admin review.');
     }
+
 
     // ── Edit Form ──────────────────────────────────────────
     public function edit($id)
@@ -299,11 +307,21 @@ public function index()
                         ->where('owner_id', auth()->id())
                         ->firstOrFail();
 
+        $schoolName = $school->name;
+        $schoolId   = $school->id;
         $school->delete();
+
+        \App\Models\ActivityLog::record(
+            'delete_school',
+            "School partner deleted school: {$schoolName} (ID: #{$schoolId})",
+            'School',
+            $schoolId
+        );
 
         return redirect()->route('school-owner.schools.index')
                          ->with('success', '🗑️ School deleted successfully!');
     }
+
 
     // ── Enquiries List ─────────────────────────────────────
     public function enquiries(Request $request)
