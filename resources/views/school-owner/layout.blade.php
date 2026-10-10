@@ -48,42 +48,44 @@
         .so-wrap { display: flex; min-height: calc(100vh - 62px); width: 100%; position: relative; }
 
         .so-sidebar {
-            background: #0f2040;
-            width: 230px; flex-shrink: 0;
+            background: #0f172a;
+            width: 236px; flex-shrink: 0;
             min-height: calc(100vh - 62px);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.08);
             transition: transform 0.25s ease;
             z-index: 150;
         }
 
         .sidebar-section-title {
-            font-size: 10px; font-weight: 700;
+            font-size: 10px; font-weight: 800;
             color: rgba(255,255,255,.35);
             text-transform: uppercase; letter-spacing: 1.2px;
             padding: 18px 20px 6px;
         }
         .sidebar-link {
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 11px;
             color: rgba(255,255,255,.65); font-size: 13.5px; font-weight: 500;
             padding: 10px 20px; text-decoration: none;
             transition: all .18s; border-left: 3px solid transparent;
         }
         .sidebar-link:hover {
             background: rgba(255,255,255,.07);
-            color: #fff; border-left-color: rgba(230,57,70,.5);
+            color: #fff; border-left-color: #60a5fa;
             text-decoration: none;
         }
         .sidebar-link.active {
-            background: rgba(255,255,255,.1);
+            background: rgba(37, 99, 235, 0.18);
             color: #fff; border-left-color: #3b82f6; font-weight: 700;
         }
         .sidebar-link i { width: 16px; text-align: center; font-size: 13px; }
-        .sidebar-divider { border-color: rgba(255,255,255,.1); margin: 6px 0; }
+        .sidebar-link.active i { color: #60a5fa !important; }
+        .sidebar-divider { border-color: rgba(255,255,255,.08); margin: 6px 0; }
 
         .enq-badge {
-            margin-left: auto; background: #3b82f6; color: #fff;
+            margin-left: auto; background: #2563eb; color: #fff;
             font-size: 10px; font-weight: 700; padding: 2px 7px;
             border-radius: 100px; min-width: 20px; text-align: center;
         }
