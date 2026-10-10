@@ -11,10 +11,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --navy: #0f2d59;
-            --navy-dark: #0a1f3d;
+            --navy: #1e40af;
+            --navy-dark: #1e3a8a;
             --yellow: #febb02;
-            --bg: #f4f6fa;
+            --bg: #f8fafc;
             --border: #e2e8f0;
             --text-main: #0f172a;
             --text-muted: #64748b;
@@ -359,7 +359,7 @@
             border-radius: 10px;
             outline: none;
             background: #fff;
-            color: #0f2d59;
+            color: #1e40af;
         }
         .btn-otp-action {
             background: var(--navy);
@@ -552,7 +552,7 @@
 
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                         <div>
-                            <div style="font-size:13px; font-weight:800; color:#0f2d59;" id="partnerOtpTitle">
+                            <div style="font-size:13px; font-weight:800; color:#0f172a;" id="partnerOtpTitle">
                                 <i class="fa-solid fa-shield-halved text-primary me-1"></i> Official Email Verification Code
                             </div>
                             <div style="font-size:11.5px; color:#64748b; margin-top:2px;" id="partnerOtpSubtitle">

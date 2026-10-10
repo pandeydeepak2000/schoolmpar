@@ -170,10 +170,10 @@
         }
         .btn-sm { padding: 5px 10px; font-size: 12px; }
         .btn-primary {
-            background: linear-gradient(135deg, #0f2d59 0%, #1d4ed8 100%);
-            color: #fff; box-shadow: 0 2px 4px rgba(15,45,89,0.18);
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #fff; box-shadow: 0 2px 6px rgba(37,99,235,0.25);
         }
-        .btn-primary:hover { background: #1e40af; color: #fff; }
+        .btn-primary:hover { background: #1d4ed8; color: #fff; }
         .btn-green  { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
         .btn-green:hover  { background: #d1fae5; }
         .btn-red    { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
@@ -234,8 +234,8 @@
         }
         .page-item.active .page-link {
             z-index: 3; color: #fff !important;
-            background-color: #0f2d59 !important;
-            border-color: #0f2d59 !important;
+            background-color: #2563eb !important;
+            border-color: #2563eb !important;
             font-weight: 700;
         }
         .page-link {
@@ -253,9 +253,9 @@
             font-weight: 600; line-height: 1;
         }
         .page-link:hover {
-            color: #0f2d59 !important;
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
+            color: #2563eb !important;
+            background-color: #eff6ff !important;
+            border-color: #bfdbfe !important;
         }
         nav[role="navigation"] {
             display: flex !important;

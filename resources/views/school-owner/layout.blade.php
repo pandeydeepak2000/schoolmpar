@@ -30,7 +30,7 @@
             width: 100%;
         }
         .so-brand {
-            font-weight: 900; font-size: 19px; color: #0f2d59;
+            font-weight: 900; font-size: 19px; color: #0f172a;
             text-decoration: none; letter-spacing: -.5px;
             display: flex; align-items: center; gap: 6px;
         }
@@ -253,7 +253,7 @@
         <!-- Hamburger (mobile only) -->
         <button id="so-menu-btn" onclick="openSoSidebar()"
             class="d-md-none"
-            style="display:none; background:#f1f5f9; border:none; color:#0f2d59;
+            style="display:none; background:#f1f5f9; border:none; color:#0f172a;
                    width:38px; height:38px; border-radius:8px; align-items:center;
                    justify-content:center; font-size:16px; cursor:pointer; flex-shrink:0;">
             <i class="fas fa-bars"></i>

@@ -5,7 +5,7 @@
 
 {{-- Header --}}
 <div style="margin-bottom:24px;">
-    <h1 style="font-size:22px; font-weight:900; color:#0f2d59; margin:0 0 4px;">
+    <h1 style="font-size:22px; font-weight:900; color:#0f172a; margin:0 0 4px;">
         👤 School Partner Profile & Security
     </h1>
     <p style="font-size:13px; color:#64748b; margin:0;">
@@ -38,7 +38,7 @@
                 <i class="fas fa-id-badge"></i>
             </div>
             <div>
-                <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0;">Partner Representative Info</h3>
+                <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0;">Partner Representative Info</h3>
                 <span style="font-size:11.5px; color:#64748b;">Your official school coordinator profile</span>
             </div>
         </div>
@@ -66,7 +66,7 @@
                        style="width:100%; border:1.5px solid #cbd5e1; border-radius:8px; padding:10px 14px; font-size:14px; outline:none; box-sizing:border-box;">
             </div>
 
-            <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer;">
+            <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
                 💾 Save Partner Changes
             </button>
         </form>
@@ -82,7 +82,7 @@
                     <i class="fas fa-lock"></i>
                 </div>
                 <div>
-                    <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0;">Partner Console Password</h3>
+                    <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0;">Partner Console Password</h3>
                     <span style="font-size:11.5px; color:#64748b;">Protect your school administration dashboard</span>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div>
-                        <div style="font-size:14px; font-weight:800; color:#0f2d59;">Two-Factor Authentication (2FA)</div>
+                        <div style="font-size:14px; font-weight:800; color:#0f172a;">Two-Factor Authentication (2FA)</div>
                         <div style="font-size:12px; color:#64748b;">
                             {{ $user->two_factor_enabled ? '🛡️ Enabled: Extra security verification active on login' : 'Disabled: Sign in with password only' }}
                         </div>

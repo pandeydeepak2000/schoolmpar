@@ -7,11 +7,11 @@
 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:12px;">
     <div style="display:flex; align-items:center; gap:12px;">
         <a href="{{ route('admin.schools') }}"
-           style="background:#fff; color:#0f2d59; border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+           style="background:#fff; color:#0f172a; border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
             <i class="fas fa-arrow-left"></i> Back to Schools
         </a>
         <div>
-            <h1 style="font-size:20px; font-weight:800; color:#0f2d59; margin:0;">
+            <h1 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
                 🏫 {{ $school->name }}
             </h1>
             <p style="font-size:12.5px; color:#64748b; margin:4px 0 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -34,7 +34,7 @@
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <a href="{{ route('admin.schools.export-parents', $school->id) }}"
-           style="background:#0f2d59; color:#fff; border-radius:8px; padding:8px 16px; font-size:12.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+           style="background:#2563eb; color:#fff; border-radius:8px; padding:8px 16px; font-size:12.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
             <i class="fas fa-file-csv"></i> 📥 Export All Parents CSV
         </a>
         <a href="{{ route('admin.schools.crud.edit', $school->id) }}"
@@ -43,7 +43,7 @@
         </a>
         @if($school->slug)
         <a href="{{ url('/schools/' . $school->slug) }}" target="_blank"
-           style="background:#fff; color:#0f2d59; border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
+           style="background:#fff; color:#0f172a; border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
             <i class="fas fa-external-link-alt"></i> Live Page
         </a>
         @endif
@@ -65,7 +65,7 @@
 {{-- 4 KPI Stats Row --}}
 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; margin-bottom:22px;">
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #3b82f6;">
-        <div style="font-size:24px; font-weight:900; color:#0f2d59;">{{ $stats['total_admissions'] }}</div>
+        <div style="font-size:24px; font-weight:900; color:#2563eb;">{{ $stats['total_admissions'] }}</div>
         <div style="font-size:11.5px; color:#64748b; font-weight:700; margin-top:2px;">Student Admissions</div>
     </div>
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #10b981;">
@@ -88,7 +88,7 @@
     {{-- Campus Details --}}
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #f1f5f9; padding-bottom:10px;">
-            <strong style="font-size:14px; color:#0f2d59;"><i class="fas fa-building me-2 text-primary"></i>Campus Profile Details</strong>
+            <strong style="font-size:14px; color:#0f172a;"><i class="fas fa-building me-2 text-primary"></i>Campus Profile Details</strong>
             <span style="font-size:11px; font-weight:800; background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:2px 8px; border-radius:999px;">
                 ● {{ ucfirst($school->status) }}
             </span>
@@ -96,7 +96,7 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12.5px;">
             <div><span style="color:#64748b;">Principal:</span> <strong>{{ $school->principal_name ?? '—' }}</strong></div>
             <div><span style="color:#64748b;">Affiliation:</span> <strong>{{ $school->affiliation_no ?? '—' }}</strong></div>
-            <div><span style="color:#64748b;">Phone:</span> <a href="tel:{{ $school->phone }}" style="color:#0f2d59; text-decoration:none; font-weight:700;">{{ $school->phone ?? '—' }}</a></div>
+            <div><span style="color:#64748b;">Phone:</span> <a href="tel:{{ $school->phone }}" style="color:#2563eb; text-decoration:none; font-weight:700;">{{ $school->phone ?? '—' }}</a></div>
             <div><span style="color:#64748b;">Email:</span> <strong>{{ $school->email ?? '—' }}</strong></div>
             <div><span style="color:#64748b;">Prospectus:</span>
                 @if($school->prospectus_path)
@@ -112,15 +112,15 @@
     {{-- School Partner Card --}}
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:20px;">
         <div style="margin-bottom:14px; border-bottom:1px solid #f1f5f9; padding-bottom:10px;">
-            <strong style="font-size:14px; color:#0f2d59;"><i class="fas fa-user-shield me-2 text-primary"></i>Assigned School Partner</strong>
+            <strong style="font-size:14px; color:#0f172a;"><i class="fas fa-user-shield me-2 text-primary"></i>Assigned School Partner</strong>
         </div>
         @if($school->owner)
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-                <div style="width:40px; height:40px; border-radius:50%; background:#0f2d59; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px;">
+                <div style="width:40px; height:40px; border-radius:50%; background:#2563eb; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px;">
                     {{ strtoupper(substr($school->owner->name, 0, 1)) }}
                 </div>
                 <div>
-                    <div style="font-weight:800; color:#0f2d59; font-size:14px;">{{ $school->owner->name }}</div>
+                    <div style="font-weight:800; color:#0f172a; font-size:14px;">{{ $school->owner->name }}</div>
                     <div style="font-size:12px; color:#64748b;">{{ $school->owner->email }}</div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
 ═══════════════════════════════════════════════════════ --}}
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; margin-bottom:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:14px; color:#0f2d59;"><i class="fas fa-user-graduate me-2 text-primary"></i>Parent Admission Applications ({{ $admissions->total() }})</strong>
+        <strong style="font-size:14px; color:#0f172a;"><i class="fas fa-user-graduate me-2 text-primary"></i>Parent Admission Applications ({{ $admissions->total() }})</strong>
         <span style="font-size:12px; color:#64748b;">Page {{ $admissions->currentPage() }} of {{ $admissions->lastPage() }}</span>
     </div>
 
@@ -172,7 +172,7 @@
             <tr style="border-bottom:1px solid #f1f5f9;">
                 <td style="padding:14px 16px; font-size:12px; color:#94a3b8;">{{ $admissions->firstItem() + $i }}</td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:13.5px; font-weight:800; color:#0f2d59;">{{ $adm->student_name }}</div>
+                    <div style="font-size:13.5px; font-weight:800; color:#0f172a;">{{ $adm->student_name }}</div>
                     <div style="font-size:11px; color:#64748b; margin-top:2px;">DOB: {{ \Carbon\Carbon::parse($adm->student_dob)->format('d M Y') }}</div>
                 </td>
                 <td style="padding:14px 16px;">
@@ -223,7 +223,7 @@
 ═══════════════════════════════════════════════════════ --}}
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; margin-bottom:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:14px; color:#0f2d59;"><i class="fas fa-calendar-check me-2 text-primary"></i>Scheduled Campus Visits ({{ $visits->total() }})</strong>
+        <strong style="font-size:14px; color:#0f172a;"><i class="fas fa-calendar-check me-2 text-primary"></i>Scheduled Campus Visits ({{ $visits->total() }})</strong>
         <span style="font-size:12px; color:#64748b;">Page {{ $visits->currentPage() }} of {{ $visits->lastPage() }}</span>
     </div>
 
@@ -252,11 +252,11 @@
             <tr style="border-bottom:1px solid #f1f5f9;">
                 <td style="padding:14px 16px; font-size:12px; color:#94a3b8;">{{ $visits->firstItem() + $i }}</td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:13.5px; font-weight:800; color:#0f2d59;">{{ $vis->visitor_name }}</div>
+                    <div style="font-size:13.5px; font-weight:800; color:#0f172a;">{{ $vis->visitor_name }}</div>
                     <div style="font-size:11.5px; color:#64748b; margin-top:2px;"><a href="tel:{{ $vis->visitor_phone }}" style="color:#334155; text-decoration:none;">📞 {{ $vis->visitor_phone }}</a></div>
                 </td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:13px; font-weight:800; color:#0f2d59;">📅 {{ \Carbon\Carbon::parse($vis->visit_date)->format('D, d M Y') }}</div>
+                    <div style="font-size:13px; font-weight:800; color:#0f172a;">📅 {{ \Carbon\Carbon::parse($vis->visit_date)->format('D, d M Y') }}</div>
                     <div style="font-size:11.5px; color:#64748b; margin-top:2px;">⏰ {{ \Carbon\Carbon::parse($vis->visit_time)->format('h:i A') }}</div>
                 </td>
                 <td style="padding:14px 16px;">
@@ -291,7 +291,7 @@
 ═══════════════════════════════════════════════════════ --}}
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; margin-bottom:24px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:14px; color:#0f2d59;"><i class="fas fa-paper-plane me-2 text-primary"></i>Inquiries & Prospectus Leads ({{ $enquiries->total() }})</strong>
+        <strong style="font-size:14px; color:#0f172a;"><i class="fas fa-paper-plane me-2 text-primary"></i>Inquiries & Prospectus Leads ({{ $enquiries->total() }})</strong>
         <span style="font-size:12px; color:#64748b;">Page {{ $enquiries->currentPage() }} of {{ $enquiries->lastPage() }}</span>
     </div>
 
@@ -312,7 +312,7 @@
             <tr style="border-bottom:1px solid #f1f5f9;">
                 <td style="padding:14px 16px; font-size:12px; color:#94a3b8;">{{ $enquiries->firstItem() + $i }}</td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:13.5px; font-weight:800; color:#0f2d59;">{{ $enq->parent_name }}</div>
+                    <div style="font-size:13.5px; font-weight:800; color:#0f172a;">{{ $enq->parent_name }}</div>
                     <div style="font-size:11.5px; color:#64748b; margin-top:2px;"><a href="tel:{{ $enq->mobile }}" style="color:#334155; text-decoration:none;">📞 {{ $enq->mobile }}</a></div>
                 </td>
                 <td style="padding:14px 16px;">

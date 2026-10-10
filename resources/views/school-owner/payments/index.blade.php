@@ -7,7 +7,7 @@
     {{-- Header --}}
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
         <div>
-            <h2 style="font-size:22px; font-weight:800; color:#0f2d59; margin:0;">Fee Collections & Token Settlements</h2>
+            <h2 style="font-size:22px; font-weight:800; color:#0f172a; margin:0;">Fee Collections & Token Settlements</h2>
             <p style="font-size:13px; color:#64748b; margin:4px 0 0;">
                 Online registration tokens and admission fees paid directly by parents for your campus
             </p>
@@ -21,7 +21,7 @@
     {{-- Transactions Panel --}}
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
         <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-            <strong style="font-size:14px; color:#0f2d59;">Transaction Records ({{ $payments->total() }})</strong>
+            <strong style="font-size:14px; color:#0f172a;">Transaction Records ({{ $payments->total() }})</strong>
             <span style="font-size:12px; color:#64748b;">Direct Razorpay Settlements</span>
         </div>
 
@@ -45,7 +45,7 @@
                         <td style="padding:13px 16px; font-size:12px; color:#94a3b8;">{{ $payments->firstItem() + $i }}</td>
                         <td style="padding:13px 16px;">
                             @if($p->admission)
-                                <strong style="color:#0f2d59; font-size:13px;">{{ $p->admission->student_name }}</strong>
+                                <strong style="color:#0f172a; font-size:13px;">{{ $p->admission->student_name }}</strong>
                                 <span style="display:inline-block; font-size:10.5px; background:#eff6ff; color:#2563eb; padding:2px 6px; border-radius:4px; font-weight:700; margin-left:4px;">
                                     {{ $p->admission->class_applying }}
                                 </span>
@@ -61,7 +61,7 @@
                             {{ $p->school->name ?? '—' }}
                         </td>
                         <td style="padding:13px 16px;">
-                            <strong style="font-size:14px; color:#0f2d59;">₹{{ number_format($p->amount, 2) }}</strong>
+                            <strong style="font-size:14px; color:#059669;">₹{{ number_format($p->amount, 2) }}</strong>
                         </td>
                         <td style="padding:13px 16px;">
                             <code style="font-size:11px; background:#f1f5f9; padding:2px 6px; border-radius:4px; color:#475569;">

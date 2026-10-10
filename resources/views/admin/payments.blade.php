@@ -87,7 +87,7 @@
                     </select>
                 </div>
 
-                <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+                <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                     <i class="fas fa-filter me-1"></i> Filter
                 </button>
 
@@ -106,7 +106,7 @@
 <div class="panel">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-receipt" style="color:#0f2d59;"></i>
+            <i class="fas fa-receipt" style="color:#2563eb;"></i>
             Transaction Ledger ({{ $payments->total() }})
         </div>
         <span style="font-size:11.5px; color:#64748b;">

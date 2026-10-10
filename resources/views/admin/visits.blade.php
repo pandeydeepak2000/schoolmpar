@@ -157,7 +157,7 @@
     <div class="panel">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-calendar-days" style="color:#0f2d59;"></i>
+                <i class="fas fa-calendar-days" style="color:#2563eb;"></i>
                 Scheduled Campus Appointments ({{ $visits->total() }})
             </div>
             <div style="display:flex; align-items:center; gap:12px;">
@@ -174,7 +174,7 @@
                 <thead>
                     <tr>
                         <th style="width:36px; text-align:center;">
-                            <input type="checkbox" id="selectAllCheckbox" style="cursor:pointer; width:15px; height:15px; accent-color:#0f2d59;">
+                            <input type="checkbox" id="selectAllCheckbox" style="cursor:pointer; width:15px; height:15px; accent-color:#2563eb;">
                         </th>
                         <th style="width:40px;">#</th>
                         <th>Visitor Details</th>
@@ -191,7 +191,7 @@
                     <tr>
                         {{-- Row Selection Checkbox --}}
                         <td style="text-align:center;">
-                            <input type="checkbox" name="ids[]" value="{{ $visit->id }}" class="visit-item-checkbox" style="cursor:pointer; width:15px; height:15px; accent-color:#0f2d59;" onchange="updateBulkBar()">
+                            <input type="checkbox" name="ids[]" value="{{ $visit->id }}" class="visit-item-checkbox" style="cursor:pointer; width:15px; height:15px; accent-color:#2563eb;" onchange="updateBulkBar()">
                         </td>
 
                         <td style="color:#94a3b8; font-size:12px;">{{ $visits->firstItem() + $i }}</td>
@@ -199,7 +199,7 @@
                         {{-- Visitor Profile --}}
                         <td>
                             <div style="display:flex; align-items:center; gap:10px;">
-                                <div style="width:34px; height:34px; background:linear-gradient(135deg,#0f2d59,#2563eb); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12.5px; flex-shrink:0;">
+                                <div style="width:34px; height:34px; background:linear-gradient(135deg,#2563eb,#1d4ed8); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12.5px; flex-shrink:0;">
                                     {{ strtoupper(substr($visit->visitor_name, 0, 1)) }}
                                 </div>
                                 <div>
@@ -307,7 +307,7 @@
                             <div style="font-size:36px; margin-bottom:8px;">📅</div>
                             <div style="font-size:14px; font-weight:700; color:#334155;">No Campus Visits Found</div>
                             <div style="font-size:12px; color:#94a3b8; margin-top:3px;">No visit appointments match your selected date range or status filter.</div>
-                            <a href="{{ route('admin.visits') }}" style="display:inline-block; margin-top:12px; background:#0f2d59; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
+                            <a href="{{ route('admin.visits') }}" style="display:inline-block; margin-top:12px; background:#2563eb; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
                                 Reset All Filters
                             </a>
                         </td>

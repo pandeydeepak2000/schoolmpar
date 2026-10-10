@@ -165,7 +165,7 @@
     <div class="panel">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-inbox" style="color:#0f2d59;"></i>
+                <i class="fas fa-inbox" style="color:#2563eb;"></i>
                 Parent Inquiries & Follow-up Leads ({{ $enquiries->total() }})
             </div>
             <div style="font-size:11.5px; color:#64748b;">
@@ -178,7 +178,7 @@
                 <thead>
                     <tr>
                         <th style="width:36px; text-align:center;">
-                            <input type="checkbox" id="selectAllEnquiriesCheckbox" style="cursor:pointer; width:15px; height:15px; accent-color:#0f2d59;">
+                            <input type="checkbox" id="selectAllEnquiriesCheckbox" style="cursor:pointer; width:15px; height:15px; accent-color:#2563eb;">
                         </th>
                         <th style="width:40px;">#</th>
                         <th>Parent Details</th>
@@ -210,7 +210,7 @@
                     <tr id="enquiry-row-{{ $enquiry->id }}">
                         {{-- Row Checkbox --}}
                         <td style="text-align:center;">
-                            <input type="checkbox" name="ids[]" value="{{ $enquiry->id }}" class="enquiry-item-checkbox" style="cursor:pointer; width:15px; height:15px; accent-color:#0f2d59;" onchange="updateBulkBarEnquiry()">
+                            <input type="checkbox" name="ids[]" value="{{ $enquiry->id }}" class="enquiry-item-checkbox" style="cursor:pointer; width:15px; height:15px; accent-color:#2563eb;" onchange="updateBulkBarEnquiry()">
                         </td>
 
                         <td style="color:#94a3b8; font-size:12px;">{{ $enquiries->firstItem() + $i }}</td>
@@ -218,7 +218,7 @@
                         {{-- Parent Profile --}}
                         <td>
                             <div style="display:flex; align-items:center; gap:10px;">
-                                <div style="width:34px; height:34px; background:linear-gradient(135deg,#0f2d59,#1d4ed8); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:12.5px; flex-shrink:0;">
+                                <div style="width:34px; height:34px; background:linear-gradient(135deg,#2563eb,#1d4ed8); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:12.5px; flex-shrink:0;">
                                     {{ strtoupper(substr($enquiry->parent_name, 0, 1)) }}
                                 </div>
                                 <div>
@@ -236,7 +236,7 @@
                         {{-- Phone Contact --}}
                         <td>
                             @if($phoneNum)
-                                <a href="tel:{{ $phoneNum }}" style="color:#0f2d59; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px; font-size:12.5px;">
+                                <a href="tel:{{ $phoneNum }}" style="color:#2563eb; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:5px; font-size:12.5px;">
                                     <i class="fas fa-phone-alt" style="color:#10b981; font-size:11px;"></i> {{ $phoneNum }}
                                 </a>
                             @else
@@ -364,7 +364,7 @@
                             <div style="font-size:36px; margin-bottom:8px;">📬</div>
                             <div style="font-size:14px; font-weight:700; color:#334155;">No parent enquiries found</div>
                             <div style="font-size:12px; color:#94a3b8; margin-top:2px;">Adjust your search keyword, date range, or lead type.</div>
-                            <a href="{{ route('admin.enquiries') }}" style="display:inline-block; margin-top:12px; background:#0f2d59; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
+                            <a href="{{ route('admin.enquiries') }}" style="display:inline-block; margin-top:12px; background:#2563eb; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
                                 Reset All Filters
                             </a>
                         </td>
@@ -466,7 +466,7 @@
 
             {{-- Past Call Notes Timeline --}}
             <div>
-                <div style="font-size:13px; font-weight:800; color:#0f2d59; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;">
+                <div style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;">
                     <span><i class="fas fa-history text-slate-400 me-1"></i> Past Follow-up History</span>
                     <span id="crmNotesCounterBadge" style="font-size:11px; font-weight:800; background:#eff6ff; color:#2563eb; padding:2px 8px; border-radius:100px;">0 entries</span>
                 </div>
@@ -490,7 +490,7 @@
 {{-- ── 6. MODAL: SEND BROCHURE TO PARENT EMAIL ── --}}
 <div id="brochureEmailModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.65); z-index:9999; align-items:center; justify-content:center; padding:12px;">
     <div style="background:#fff; border-radius:16px; max-width:520px; width:100%; max-height:90vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.3); overflow:hidden;">
-        <div style="background:#0f2d59; color:#fff; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+        <div style="background:#2563eb; color:#fff; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
             <div style="font-size:15px; font-weight:900;"><i class="fas fa-file-pdf text-amber-400 me-2"></i> Send Official Brochure to Parent</div>
             <button type="button" onclick="closeBrochureModal()" style="background:transparent; border:none; color:#fff; font-size:22px; line-height:1; cursor:pointer;">&times;</button>
         </div>
@@ -500,7 +500,7 @@
             <div style="padding:20px; overflow-y:auto;">
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px 16px; margin-bottom:16px;">
                     <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">School Target</div>
-                    <div id="modalSchoolName" style="font-size:14px; font-weight:800; color:#0f2d59; margin-top:2px;">—</div>
+                    <div id="modalSchoolName" style="font-size:14px; font-weight:800; color:#0f172a; margin-top:2px;">—</div>
                     <div id="modalPdfStatus" style="font-size:11.5px; color:#16a34a; margin-top:4px; font-weight:600;">
                         <i class="fas fa-check-circle"></i> Official Prospectus PDF will be attached & linked
                     </div>
@@ -513,7 +513,7 @@
 
                 <div style="margin-bottom:14px;">
                     <label style="display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:4px;">Parent Email Address *</label>
-                    <input type="email" name="email" id="modalParentEmail" required placeholder="Enter parent's email address" style="width:100%; padding:9px 12px; border:1.5px solid #e2e8f0; border-radius:8px; font-size:13px; outline:none; color:#0f2d59; font-weight:600;">
+                    <input type="email" name="email" id="modalParentEmail" required placeholder="Enter parent's email address" style="width:100%; padding:9px 12px; border:1.5px solid #e2e8f0; border-radius:8px; font-size:13px; outline:none; color:#0f172a; font-weight:600;">
                 </div>
 
                 <div style="margin-bottom:14px;">
@@ -533,7 +533,7 @@
 
                 <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
                     <button type="button" onclick="closeBrochureModal()" style="padding:10px 18px; border:1.5px solid #e2e8f0; background:#fff; border-radius:8px; font-size:13px; font-weight:700; color:#64748b; cursor:pointer;">Cancel</button>
-                    <button type="submit" style="padding:10px 22px; background:#0f2d59; border:none; border-radius:8px; font-size:13px; font-weight:800; color:#fff; cursor:pointer;">
+                    <button type="submit" style="padding:10px 22px; background:#2563eb; border:none; border-radius:8px; font-size:13px; font-weight:800; color:#fff; cursor:pointer; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                         🚀 Send Brochure Packet Now
                     </button>
                 </div>
@@ -650,9 +650,9 @@
             const followup = item.followup_date ? `<span style="background:#fffbeb; color:#b45309; border:1px solid #fde68a; border-radius:4px; padding:1px 6px; font-size:10.5px; font-weight:800; margin-left:8px;"><i class="far fa-clock"></i> Next Call: ${item.followup_date}</span>` : '';
 
             html += `
-                <div style="background:#fff; border:1px solid #e2e8f0; border-left:4px solid #0f2d59; border-radius:8px; padding:12px 14px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+                <div style="background:#fff; border:1px solid #e2e8f0; border-left:4px solid #2563eb; border-radius:8px; padding:12px 14px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
                     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
-                        <div style="font-size:11.5px; font-weight:800; color:#0f2d59; display:flex; align-items:center;">
+                        <div style="font-size:11.5px; font-weight:800; color:#0f172a; display:flex; align-items:center;">
                             <i class="fas fa-user-tie me-1 text-slate-400"></i> ${escapeHtml(author)}
                             ${followup}
                         </div>

@@ -30,7 +30,7 @@
     {{-- Header --}}
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
         <div>
-            <h2 style="font-size:22px; font-weight:800; color:#0f2d59; margin:0;">Add New School to SchoolMapr</h2>
+            <h2 style="font-size:22px; font-weight:800; color:#0f172a; margin:0;">Add New School to SchoolMapr</h2>
             <p style="font-size:13px; color:#64748b; margin:4px 0 0;">Create a verified school profile in Patna District or across Bihar</p>
         </div>
         <a href="{{ route('admin.schools') }}"
@@ -56,7 +56,7 @@
 
         {{-- Panel 1: Basic & Location Info --}}
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-            <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
+            <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
                 🏫 School Details & Location (Patna / Bihar)
             </h3>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
@@ -116,7 +116,7 @@
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
                 <div>
-                    <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0;">
+                    <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0;">
                         📸 Campus Photo Gallery (All 5 Slots on Profile)
                     </h3>
                     <p style="font-size:12px; color:#64748b; margin:2px 0 0;">
@@ -153,7 +153,7 @@
                 {{-- SLOT 2: CLASSROOM & SMARTBOARDS --}}
                 <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; background:#f8fafc;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <strong style="font-size:13px; color:#0f2d59;">2. Classroom & Smartboard</strong>
+                        <strong style="font-size:13px; color:#0f172a;">2. Classroom & Smartboard</strong>
                         <span style="font-size:10px; background:#2563eb; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 2</span>
                     </div>
                     <div style="width:100%; height:130px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:10px;">
@@ -170,7 +170,7 @@
                 {{-- SLOT 3: ACTIVITY / SPORTS GROUND --}}
                 <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; background:#f8fafc;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <strong style="font-size:13px; color:#0f2d59;">3. Activity / Sports Area</strong>
+                        <strong style="font-size:13px; color:#0f172a;">3. Activity / Sports Area</strong>
                         <span style="font-size:10px; background:#ca8a04; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 3</span>
                     </div>
                     <div style="width:100%; height:130px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:10px;">
@@ -187,7 +187,7 @@
                 {{-- SLOT 4: SCIENCE & COMPUTER LAB --}}
                 <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; background:#f8fafc;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <strong style="font-size:13px; color:#0f2d59;">4. Science & IT Laboratory</strong>
+                        <strong style="font-size:13px; color:#0f172a;">4. Science & IT Laboratory</strong>
                         <span style="font-size:10px; background:#16a34a; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 4</span>
                     </div>
                     <div style="width:100%; height:130px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:10px;">
@@ -204,7 +204,7 @@
                 {{-- SLOT 5: LIBRARY & LEARNING RESOURCES --}}
                 <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; background:#f8fafc;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <strong style="font-size:13px; color:#0f2d59;">5. Library & Learning Resources</strong>
+                        <strong style="font-size:13px; color:#0f172a;">5. Library & Learning Resources</strong>
                         <span style="font-size:10px; background:#9333ea; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 5</span>
                     </div>
                     <div style="width:100%; height:130px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:10px;">
@@ -221,7 +221,7 @@
                 {{-- SLOT 6: AUDITORIUM & CAMPUS INFRASTRUCTURE --}}
                 <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; background:#f8fafc;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <strong style="font-size:13px; color:#0f2d59;">6. Auditorium & Campus Infrastructure</strong>
+                        <strong style="font-size:13px; color:#0f172a;">6. Auditorium & Campus Infrastructure</strong>
                         <span style="font-size:10px; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 6</span>
                     </div>
                     <div style="width:100%; height:130px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:10px;">
@@ -241,7 +241,7 @@
         {{-- Panel 2.5: PROSPECTUS & BROCHURE UPLOAD --}}
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
             <div style="margin-bottom:14px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
-                <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0;">
+                <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0;">
                     📄 Official School Prospectus & Fee Brochure (PDF/Image)
                 </h3>
                 <p style="font-size:12px; color:#64748b; margin:2px 0 0;">
@@ -265,7 +265,7 @@
 
         {{-- Panel 3: Academic Info --}}
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-            <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
+            <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
                 📚 Academic Details & Grades
             </h3>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
@@ -322,7 +322,7 @@
 
         {{-- Panel 4: Fee Structure --}}
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-            <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
+            <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
                 💰 Verified Fee Structure
             </h3>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
@@ -351,7 +351,7 @@
 
         {{-- Panel 5: Contact & Badges --}}
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-            <h3 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
+            <h3 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 18px; padding-bottom:12px; border-bottom:1.5px solid #f1f5f9;">
                 📞 Contact & Verified Badges
             </h3>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-bottom:18px;">
@@ -376,12 +376,12 @@
             </div>
 
             <div style="display:flex; gap:32px; padding-top:14px; border-top:1px solid #f1f5f9; flex-wrap:wrap;">
-                <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:#0f2d59; cursor:pointer;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:#0f172a; cursor:pointer;">
                     <input type="checkbox" name="is_verified" value="1" checked
                            style="accent-color:#16a34a; width:18px; height:18px;">
                     ✅ Verified School by SchoolMapr
                 </label>
-                <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:#0f2d59; cursor:pointer;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:#0f172a; cursor:pointer;">
                     <input type="checkbox" name="is_featured" value="1" checked
                            style="accent-color:#f59e0b; width:18px; height:18px;">
                     ⭐ Featured on Homepage
@@ -392,7 +392,7 @@
         {{-- Buttons --}}
         <div style="display:flex; gap:12px; margin-bottom:40px;">
             <button type="submit"
-                    style="background:#0f2d59; color:#fff; border:none; border-radius:10px; padding:14px 40px; font-weight:800; font-size:15px; cursor:pointer;">
+                    style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; border:none; border-radius:10px; padding:14px 40px; font-weight:800; font-size:15px; cursor:pointer; box-shadow:0 3px 10px rgba(37,99,235,0.25);">
                 🚀 Create & Publish School
             </button>
             <a href="{{ route('admin.schools') }}"

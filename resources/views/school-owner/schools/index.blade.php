@@ -14,14 +14,14 @@
 {{-- Header --}}
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
     <div>
-        <h4 style="font-size:20px; font-weight:800; color:#0f2d59; margin:0;">
+        <h4 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
             <i class="fas fa-school me-2 text-primary"></i>My School Campuses
         </h4>
         <p style="font-size:13px; color:#64748b; margin:4px 0 0;">
             Total {{ $schools->total() }} school profile{{ $schools->total() != 1 ? 's' : '' }} managed under your account
         </p>
     </div>
-    <a href="{{ route('school-owner.schools.create') }}" style="background:#0f2d59; color:#fff; font-weight:800; font-size:13px; text-decoration:none; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
+    <a href="{{ route('school-owner.schools.create') }}" style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; font-weight:800; font-size:13px; text-decoration:none; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
         <i class="fas fa-plus"></i> Add New Campus
     </a>
 </div>
@@ -29,7 +29,7 @@
 {{-- Stats Row --}}
 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; margin-bottom:24px;">
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #3b82f6;">
-        <div style="font-size:24px; font-weight:900; color:#0f2d59;">{{ $stats['total'] }}</div>
+        <div style="font-size:24px; font-weight:900; color:#0f172a;">{{ $stats['total'] }}</div>
         <div style="font-size:11.5px; color:#64748b; font-weight:700; margin-top:2px;">Total Campuses</div>
     </div>
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #10b981;">
@@ -57,7 +57,7 @@
         </div>
 
         <div style="min-width:0;">
-            <h5 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 2px;">
+            <h5 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 2px;">
                 {{ $school->name }}
             </h5>
             <div style="font-size:12px; color:#64748b; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
@@ -108,7 +108,7 @@
         </a>
 
         <a href="{{ route('school-owner.schools.edit', $school->id) }}"
-           style="background:#0f2d59; color:#fff; font-size:12px; font-weight:700; text-decoration:none; padding:7px 14px; border-radius:6px;">
+           style="background:#2563eb; color:#fff; font-size:12px; font-weight:700; text-decoration:none; padding:7px 14px; border-radius:6px; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
             <i class="fas fa-pen me-1"></i> Edit Profile & Gallery
         </a>
     </div>
@@ -117,11 +117,11 @@
 @empty
 <div style="background:#fff; border:2px dashed #e2e8f0; border-radius:16px; padding:60px 20px; text-align:center;">
     <div style="font-size:48px; margin-bottom:12px;">🏫</div>
-    <h5 style="font-size:16px; font-weight:800; color:#0f2d59;">No Schools Listed Yet</h5>
+    <h5 style="font-size:16px; font-weight:800; color:#0f172a;">No Schools Listed Yet</h5>
     <p style="font-size:13px; color:#64748b; max-width:320px; margin:4px auto 16px;">
         Add your school campus to connect with parents across Patna for direct admissions.
     </p>
-    <a href="{{ route('school-owner.schools.create') }}" style="background:#0f2d59; color:#fff; font-size:13px; font-weight:800; text-decoration:none; padding:10px 22px; border-radius:8px; display:inline-block;">
+    <a href="{{ route('school-owner.schools.create') }}" style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; font-size:13px; font-weight:800; text-decoration:none; padding:10px 22px; border-radius:8px; display:inline-block; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
         <i class="fas fa-plus me-1"></i> Add Your First Campus
     </a>
 </div>

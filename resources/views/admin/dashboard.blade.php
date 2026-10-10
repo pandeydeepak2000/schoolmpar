@@ -133,7 +133,7 @@
         <div class="panel">
             <div class="panel-header">
                 <div class="panel-title">
-                    <i class="fas fa-file-signature" style="color:#0f2d59;"></i>
+                    <i class="fas fa-file-signature" style="color:#2563eb;"></i>
                     Recent Admission Applications ({{ $stats['total_admissions'] }})
                 </div>
                 <a href="{{ route('admin.admissions') }}" style="font-size:12px; font-weight:700; color:#2563eb; text-decoration:none;">View all →</a>

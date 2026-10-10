@@ -132,7 +132,7 @@
         {{-- SLOT 2 --}}
         <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; background:#f8fafc;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="font-size:12.5px; color:#0f2d59;">2. Classroom & Smartboard</strong>
+                <strong style="font-size:12.5px; color:#0f172a;">2. Classroom & Smartboard</strong>
                 <span style="font-size:10px; background:#2563eb; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 2</span>
             </div>
             <div style="width:100%; height:120px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:8px;">
@@ -147,7 +147,7 @@
         {{-- SLOT 3 --}}
         <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; background:#f8fafc;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="font-size:12.5px; color:#0f2d59;">3. Sports & Activity Area</strong>
+                <strong style="font-size:12.5px; color:#0f172a;">3. Sports & Activity Area</strong>
                 <span style="font-size:10px; background:#ca8a04; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 3</span>
             </div>
             <div style="width:100%; height:120px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:8px;">
@@ -162,7 +162,7 @@
         {{-- SLOT 4 --}}
         <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; background:#f8fafc;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="font-size:12.5px; color:#0f2d59;">4. Science & IT Lab</strong>
+                <strong style="font-size:12.5px; color:#0f172a;">4. Science & IT Lab</strong>
                 <span style="font-size:10px; background:#16a34a; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 4</span>
             </div>
             <div style="width:100%; height:120px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:8px;">
@@ -177,7 +177,7 @@
         {{-- SLOT 5 --}}
         <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; background:#f8fafc;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="font-size:12.5px; color:#0f2d59;">5. Library & Facilities</strong>
+                <strong style="font-size:12.5px; color:#0f172a;">5. Library & Facilities</strong>
                 <span style="font-size:10px; background:#9333ea; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 5</span>
             </div>
             <div style="width:100%; height:120px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:8px;">
@@ -192,7 +192,7 @@
         {{-- SLOT 6 --}}
         <div style="border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; background:#f8fafc;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="font-size:12.5px; color:#0f2d59;">6. Auditorium & Campus</strong>
+                <strong style="font-size:12.5px; color:#0f172a;">6. Auditorium & Campus</strong>
                 <span style="font-size:10px; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">Gallery 6</span>
             </div>
             <div style="width:100%; height:120px; border-radius:8px; overflow:hidden; background:#e2e8f0; margin-bottom:8px;">

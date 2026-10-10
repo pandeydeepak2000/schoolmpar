@@ -27,7 +27,7 @@
     <div class="panel">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-credit-card" style="color:#0f2d59;"></i>
+                <i class="fas fa-credit-card" style="color:#2563eb;"></i>
                 Razorpay API Credentials
             </div>
             <span style="font-size:11.5px; font-weight:800; background:{{ $mode === 'live' ? '#ecfdf5' : '#fffbeb' }}; color:{{ $mode === 'live' ? '#059669' : '#d97706' }}; border:1px solid {{ $mode === 'live' ? '#a7f3d0' : '#fde68a' }}; padding:3px 10px; border-radius:999px; text-transform:uppercase;">
@@ -92,7 +92,7 @@
                        style="width:100%; border:1.5px solid #e2e8f0; border-radius:8px; padding:10px 14px; font-size:13.5px; background:#f8fafc; color:#64748b; outline:none; box-sizing:border-box;">
             </div>
 
-            <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:12px 28px; font-weight:800; font-size:14px; cursor:pointer;">
+            <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:12px 28px; font-weight:800; font-size:14px; cursor:pointer; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                 💾 Save Gateway Settings
             </button>
         </form>
@@ -101,7 +101,7 @@
     {{-- Guide & Instructions Panel --}}
     <div style="display:flex; flex-direction:column; gap:16px;">
         <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; padding:20px;">
-            <strong style="font-size:14px; color:#0f2d59; display:block; margin-bottom:10px;">
+            <strong style="font-size:14px; color:#0f172a; display:block; margin-bottom:10px;">
                 📖 How to get Razorpay API Keys
             </strong>
             <ol style="margin:0; padding-left:18px; font-size:12.5px; color:#475569; line-height:1.7;">

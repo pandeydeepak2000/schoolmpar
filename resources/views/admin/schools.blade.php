@@ -145,11 +145,11 @@
 <div class="panel">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-school" style="color:#0f2d59;"></i>
+            <i class="fas fa-school" style="color:#2563eb;"></i>
             Listed School Profiles ({{ $schools->total() }})
         </div>
         <a href="{{ route('admin.schools.crud.create') }}"
-           style="background:#0f2d59; color:#fff; font-size:12.5px; font-weight:800; text-decoration:none; padding:8px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
+           style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; font-size:12.5px; font-weight:800; text-decoration:none; padding:8px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
             <i class="fas fa-plus" style="font-size:11px;"></i> Add New School
         </a>
     </div>
@@ -270,7 +270,7 @@
                     <div style="display:inline-flex; flex-direction:column; gap:4px; align-items:flex-end;">
                         {{-- Manage --}}
                         <a href="{{ route('admin.schools.manage', $school->id) }}"
-                           style="background:#0f2d59; color:#fff; border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                           style="background:#2563eb; color:#fff; border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
                             <i class="fas fa-sliders" style="font-size:10px;"></i> Manage
                         </a>
 

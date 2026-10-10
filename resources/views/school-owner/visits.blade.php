@@ -7,7 +7,7 @@
 {{-- Header --}}
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
     <div>
-        <h4 style="font-size:20px; font-weight:800; color:#0f2d59; margin:0;">
+        <h4 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
             <i class="fas fa-calendar-check me-2 text-primary"></i>Campus Visit Appointments
         </h4>
         <p style="font-size:13px; color:#64748b; margin:4px 0 0;">
@@ -19,7 +19,7 @@
 {{-- Stats --}}
 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin-bottom:24px;">
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #3b82f6;">
-        <div style="font-size:24px; font-weight:900; color:#0f2d59;">{{ $stats['total'] }}</div>
+        <div style="font-size:24px; font-weight:900; color:#0f172a;">{{ $stats['total'] }}</div>
         <div style="font-size:11.5px; color:#64748b; font-weight:700; margin-top:2px;">Total Bookings</div>
     </div>
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #f59e0b;">
@@ -54,7 +54,7 @@
             <input type="date" name="date" style="border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 12px; font-size:13px; outline:none; color:#334155; background:#fff;"
                    value="{{ request('date') }}">
         </div>
-        <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+        <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
             <i class="fas fa-filter me-1"></i> Filter
         </button>
         @if(request('status') || request('date'))
@@ -76,7 +76,7 @@
 @if($visits->isEmpty())
 <div style="background:#fff; border:2px dashed #e2e8f0; border-radius:16px; padding:60px 20px; text-align:center;">
     <div style="font-size:48px; margin-bottom:12px;">📅</div>
-    <h5 style="font-size:16px; font-weight:800; color:#0f2d59;">No Campus Visits Scheduled Yet</h5>
+    <h5 style="font-size:16px; font-weight:800; color:#0f172a;">No Campus Visits Scheduled Yet</h5>
     <p style="font-size:13px; color:#64748b; max-width:340px; margin:4px auto 0;">
         When parents book a campus tour to inspect your school facilities, they will appear here.
     </p>
@@ -86,7 +86,7 @@
 
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:14px; color:#0f2d59;">Scheduled Appointments ({{ $visits->total() }})</strong>
+        <strong style="font-size:14px; color:#0f172a;">Scheduled Appointments ({{ $visits->total() }})</strong>
         <span style="font-size:12px; color:#64748b;">Showing {{ $visits->firstItem() }}–{{ $visits->lastItem() }}</span>
     </div>
 
@@ -119,7 +119,7 @@
                     {{ $visits->firstItem() + $i }}
                 </td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:14px; font-weight:800; color:#0f2d59;">{{ $visit->visitor_name }}</div>
+                    <div style="font-size:14px; font-weight:800; color:#0f172a;">{{ $visit->visitor_name }}</div>
                     <div style="font-size:11.5px; color:#64748b; margin-top:2px; display:flex; align-items:center; gap:6px;">
                         <a href="tel:{{ $visit->visitor_phone }}" style="color:#334155; text-decoration:none; font-weight:700;">📞 {{ $visit->visitor_phone }}</a>
                         @php
@@ -137,7 +137,7 @@
                     {{ $visit->school->name ?? '—' }}
                 </td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:13px; font-weight:800; color:#0f2d59;">
+                    <div style="font-size:13px; font-weight:800; color:#0f172a;">
                         📅 {{ \Carbon\Carbon::parse($visit->visit_date)->format('D, d M Y') }}
                     </div>
                     <div style="font-size:11.5px; color:#64748b; margin-top:2px;">

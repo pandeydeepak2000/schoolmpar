@@ -160,7 +160,7 @@
                 </select>
                 @endif
 
-                <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+                <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.3);">
                     <i class="fas fa-filter me-1"></i> Search
                 </button>
 
@@ -178,7 +178,7 @@
 <div class="panel">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-id-badge" style="color:#0f2d59; font-size:14px;"></i>
+            <i class="fas fa-id-badge" style="color:#2563eb; font-size:14px;"></i>
             @if(request('role') === 'parent')
                 Registered Parents ({{ $users->total() }})
             @elseif(request('role') === 'school_owner')
@@ -347,7 +347,7 @@
                         </div>
                         <div style="font-size:14px; font-weight:700; color:#475569;">No users found matching your filters</div>
                         <div style="font-size:12px; color:#94a3b8; margin-top:4px;">Try clearing your search query or switching role tabs.</div>
-                        <a href="{{ route('admin.users') }}" style="display:inline-block; margin-top:12px; background:#0f2d59; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
+                        <a href="{{ route('admin.users') }}" style="display:inline-block; margin-top:12px; background:#2563eb; color:#fff; border-radius:6px; padding:7px 16px; font-size:12px; font-weight:700; text-decoration:none;">
                             Clear All Filters
                         </a>
                     </td>

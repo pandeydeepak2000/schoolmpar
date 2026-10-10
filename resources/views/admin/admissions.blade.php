@@ -90,7 +90,7 @@
                     </select>
                 </div>
 
-                <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer;">
+                <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                     <i class="fas fa-filter me-1"></i> Filter
                 </button>
 
@@ -109,7 +109,7 @@
 <div class="panel">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-graduation-cap" style="color:#0f2d59;"></i>
+            <i class="fas fa-graduation-cap" style="color:#2563eb;"></i>
             Admission Records ({{ $admissions->total() }})
         </div>
         <span style="font-size:11.5px; color:#64748b;">
@@ -141,7 +141,7 @@
                     {{-- Student --}}
                     <td>
                         <div style="display:flex; align-items:center; gap:10px;">
-                            <div style="width:36px; height:36px; background:linear-gradient(135deg,#0f2d59,#1e40af); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; flex-shrink:0;">
+                            <div style="width:36px; height:36px; background:linear-gradient(135deg,#2563eb,#1d4ed8); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; flex-shrink:0;">
                                 {{ strtoupper(substr($adm->student_name, 0, 1)) }}
                             </div>
                             <div>

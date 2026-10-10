@@ -10,7 +10,7 @@
     <!-- User Header Card -->
     <div class="panel" style="margin-bottom:16px;">
         <div style="padding:18px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-            <div style="width:52px; height:52px; background:linear-gradient(135deg,#0f2d59,#1e40af); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:20px; flex-shrink:0;">
+            <div style="width:52px; height:52px; background:linear-gradient(135deg,#2563eb,#1d4ed8); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:20px; flex-shrink:0; box-shadow:0 3px 8px rgba(37,99,235,0.25);">
                 {{ strtoupper(substr($user->name, 0, 1)) }}
             </div>
             <div>
@@ -41,7 +41,7 @@
     <div class="panel" style="margin-bottom:16px;">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-user-edit" style="color:#0f2d59; font-size:13px;"></i>
+                <i class="fas fa-user-edit" style="color:#2563eb; font-size:13px;"></i>
                 Edit Account Details & Password
             </div>
         </div>
@@ -130,7 +130,7 @@
 
                 <!-- Password Change Section -->
                 <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; margin-bottom:22px;">
-                    <div style="font-weight:800; font-size:13.5px; color:#0f2d59; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                    <div style="font-weight:800; font-size:13.5px; color:#0f172a; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
                         <i class="fas fa-key text-warning"></i> Reset / Change Password
                     </div>
                     <p style="font-size:12px; color:#64748b; margin-bottom:14px;">
@@ -163,7 +163,7 @@
                 <!-- Buttons -->
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
                     <button type="submit"
-                        style="flex:1; background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:12px; font-weight:800; font-size:14px; cursor:pointer; transition:background 0.15s; display:flex; align-items:center; justify-content:center; gap:7px;">
+                        style="flex:1; background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; border:none; border-radius:8px; padding:12px; font-weight:800; font-size:14px; cursor:pointer; transition:background 0.15s; display:flex; align-items:center; justify-content:center; gap:7px; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                         <i class="fas fa-save"></i> Save Changes
                     </button>
                     <a href="/admin/users"

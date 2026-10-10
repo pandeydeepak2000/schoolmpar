@@ -4,22 +4,22 @@
 @section('content')
 
 {{-- ── 1. WELCOME BANNER ── --}}
-<div style="background:linear-gradient(135deg, #0f2d59 0%, #1e4a85 100%); border-radius:14px; padding:24px; color:#fff; margin-bottom:24px;">
+<div style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-radius:14px; padding:24px; color:#fff; margin-bottom:24px; box-shadow:0 4px 14px rgba(37,99,235,0.2);">
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
         <div>
-            <span style="background:rgba(255,255,255,0.15); font-size:11px; font-weight:800; padding:3px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:0.5px;">
+            <span style="background:rgba(255,255,255,0.18); font-size:11px; font-weight:800; padding:3px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:0.5px;">
                 School Partner Console
             </span>
             <h2 style="font-size:22px; font-weight:900; margin:8px 0 2px; color:#fff;">Welcome, {{ auth()->user()->name }} 👋</h2>
-            <p style="font-size:13px; color:rgba(255,255,255,0.75); margin:0;">
+            <p style="font-size:13px; color:rgba(255,255,255,0.85); margin:0;">
                 Manage your Patna school profiles, admissions, campus visit schedules, and parent enquiries.
             </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a href="{{ route('school-owner.schools.create') }}" style="background:#fff; color:#0f2d59; font-weight:800; font-size:13px; text-decoration:none; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
+            <a href="{{ route('school-owner.schools.create') }}" style="background:#fff; color:#2563eb; font-weight:800; font-size:13px; text-decoration:none; padding:10px 18px; border-radius:8px; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
                 <i class="fas fa-plus"></i> Add New Campus
             </a>
-            <a href="/" target="_blank" style="background:rgba(255,255,255,0.12); color:#fff; font-weight:700; font-size:13px; text-decoration:none; padding:10px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
+            <a href="/" target="_blank" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:700; font-size:13px; text-decoration:none; padding:10px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,0.25);">
                 <i class="fas fa-external-link-alt"></i> Live Directory
             </a>
         </div>
@@ -69,7 +69,7 @@
                 <i class="fas fa-bolt"></i>
             </div>
         </div>
-        <div style="font-size:13px; font-weight:800; color:#0f2d59; margin-top:4px;">
+        <div style="font-size:13px; font-weight:800; color:#0f172a; margin-top:4px;">
             <a href="{{ route('school-owner.visits.index') }}" style="color:#2563eb; text-decoration:none;">Campus Visits →</a>
         </div>
         <div style="font-size:11.5px; color:#64748b; margin-top:2px;">
@@ -82,10 +82,10 @@
 {{-- ── 3. MANAGED CAMPUSES ── --}}
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; overflow:hidden; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-        <strong style="font-size:15px; color:#0f2d59;">
+        <strong style="font-size:15px; color:#0f172a;">
             <i class="fas fa-school me-2 text-primary"></i>Managed School Profiles ({{ $schools->count() }})
         </strong>
-        <a href="{{ route('school-owner.schools.create') }}" style="background:#0f2d59; color:#fff; font-size:12px; font-weight:800; text-decoration:none; padding:7px 14px; border-radius:6px; display:inline-flex; align-items:center; gap:5px;">
+        <a href="{{ route('school-owner.schools.create') }}" style="background:#2563eb; color:#fff; font-size:12px; font-weight:800; text-decoration:none; padding:7px 14px; border-radius:6px; display:inline-flex; align-items:center; gap:5px; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
             <i class="fas fa-plus" style="font-size:10px;"></i> Add Campus
         </a>
     </div>
@@ -97,7 +97,7 @@
                 <img src="{{ $school->featured_image_url }}" alt="{{ $school->name }}" style="width:100%; height:100%; object-fit:cover;">
             </div>
             <div>
-                <h5 style="font-size:15px; font-weight:800; color:#0f2d59; margin:0 0 2px;">{{ $school->name }}</h5>
+                <h5 style="font-size:15px; font-weight:800; color:#0f172a; margin:0 0 2px;">{{ $school->name }}</h5>
                 <div style="font-size:12px; color:#64748b; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <span>📍 {{ $school->city ?? 'Patna' }}</span>
                     <span>•</span>
@@ -139,11 +139,11 @@
     @empty
     <div style="padding:50px 20px; text-align:center;">
         <div style="font-size:36px; margin-bottom:10px;">🏫</div>
-        <h5 style="font-size:15px; font-weight:800; color:#0f2d59;">No School Campuses Listed Yet</h5>
+        <h5 style="font-size:15px; font-weight:800; color:#0f172a;">No School Campuses Listed Yet</h5>
         <p style="font-size:13px; color:#64748b; max-width:340px; margin:4px auto 16px;">
             List your Patna school for free to receive online admission forms and campus guided tours.
         </p>
-        <a href="{{ route('school-owner.schools.create') }}" style="background:#0f2d59; color:#fff; font-size:13px; font-weight:800; text-decoration:none; padding:9px 20px; border-radius:8px; display:inline-block;">
+        <a href="{{ route('school-owner.schools.create') }}" style="background:#2563eb; color:#fff; font-size:13px; font-weight:800; text-decoration:none; padding:9px 20px; border-radius:8px; display:inline-block; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
             <i class="fas fa-plus me-1"></i> Add Your First Campus
         </a>
     </div>

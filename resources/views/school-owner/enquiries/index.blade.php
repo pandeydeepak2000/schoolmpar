@@ -299,8 +299,8 @@ $st = $stMap[$enq->status] ?? $stMap['new'];
                 <button type="button"
                         onclick="openOwnerBrochureModal('{{ $enq->id }}', '{{ addslashes($enq->parent_name) }}', '{{ $parentEmail }}', '{{ addslashes($enq->school->name ?? 'School') }}', '{{ $enq->school?->prospectus_path ? 1 : 0 }}')"
                         style="display:inline-flex;align-items:center;gap:6px;
-                               background:#0f2d59;color:#fff;border:none;border-radius:8px;
-                               padding:5px 12px;font-size:12.5px;font-weight:700;cursor:pointer;">
+                               background:#2563eb;color:#fff;border:none;border-radius:8px;
+                               padding:5px 12px;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                     <i class="fas fa-envelope"></i> Email Brochure
                 </button>
 

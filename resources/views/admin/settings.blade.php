@@ -33,7 +33,7 @@
     <div class="panel">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-envelope-open-text" style="color:#0f2d59;"></i>
+                <i class="fas fa-envelope-open-text" style="color:#2563eb;"></i>
                 Email Server & Sender Identity
             </div>
             <span style="font-size:11px; font-weight:800; background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; padding:2px 8px; border-radius:999px;">
@@ -118,14 +118,14 @@
                 </select>
             </div>
 
-            <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer;">
+            <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
                 💾 Save Mail Settings
             </button>
         </form>
 
         {{-- Test Email Form --}}
         <div style="border-top:1.5px solid #f1f5f9; padding:18px 22px; background:#f8fafc;">
-            <strong style="font-size:12.5px; color:#0f2d59; display:block; margin-bottom:6px;">
+            <strong style="font-size:12.5px; color:#0f172a; display:block; margin-bottom:6px;">
                 🧪 Test Mail Server Delivery
             </strong>
             <form action="{{ route('admin.settings.mail.test') }}" method="POST" style="display:flex; gap:10px;">
@@ -143,7 +143,7 @@
     <div class="panel">
         <div class="panel-header">
             <div class="panel-title">
-                <i class="fas fa-credit-card" style="color:#0f2d59;"></i>
+                <i class="fas fa-credit-card" style="color:#2563eb;"></i>
                 Razorpay Payment Gateway
             </div>
             <span style="font-size:11.5px; font-weight:800; background:{{ $mode === 'live' ? '#ecfdf5' : '#fffbeb' }}; color:{{ $mode === 'live' ? '#059669' : '#d97706' }}; border:1px solid {{ $mode === 'live' ? '#a7f3d0' : '#fde68a' }}; padding:3px 10px; border-radius:999px; text-transform:uppercase;">
@@ -207,7 +207,7 @@
                        style="width:100%; border:1.5px solid #e2e8f0; border-radius:8px; padding:8px 12px; font-size:13px; background:#f8fafc; color:#64748b; outline:none; box-sizing:border-box;">
             </div>
 
-            <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer;">
+            <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
                 💾 Save Gateway Settings
             </button>
         </form>
@@ -228,7 +228,7 @@
 <div class="panel" style="margin-top:20px;">
     <div class="panel-header">
         <div class="panel-title">
-            <i class="fas fa-robot" style="color:#0f2d59;"></i>
+            <i class="fas fa-robot" style="color:#2563eb;"></i>
             Google reCAPTCHA v2 (Anti-Bot & Brute Force Defense)
         </div>
         <span style="font-size:11.5px; font-weight:800; background:{{ $recaptchaEnabled ? '#ecfdf5' : '#f1f5f9' }}; color:{{ $recaptchaEnabled ? '#059669' : '#64748b' }}; border:1px solid {{ $recaptchaEnabled ? '#a7f3d0' : '#e2e8f0' }}; padding:3px 10px; border-radius:999px;">
@@ -241,7 +241,7 @@
 
         <div style="margin-bottom:18px;">
             <label style="display:flex; align-items:center; gap:10px; cursor:pointer; background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:10px; padding:14px 18px;">
-                <input type="checkbox" name="recaptcha_enabled" value="1" {{ $recaptchaEnabled ? 'checked' : '' }} style="width:18px; height:18px; accent-color:#0f2d59;">
+                <input type="checkbox" name="recaptcha_enabled" value="1" {{ $recaptchaEnabled ? 'checked' : '' }} style="width:18px; height:18px; accent-color:#2563eb;">
                 <div>
                     <strong style="font-size:13.5px; color:#1e293b; display:block;">Enable Google reCAPTCHA on Login & Registration</strong>
                     <span style="font-size:12px; color:#64748b;">Prevents automated scripts, dictionary attacks, and credential stuffing on admission forms.</span>
@@ -268,7 +268,7 @@
             </div>
         </div>
 
-        <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer;">
+        <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:800; font-size:13.5px; cursor:pointer; box-shadow:0 1px 3px rgba(37,99,235,0.25);">
             💾 Save Captcha Security Settings
         </button>
     </form>

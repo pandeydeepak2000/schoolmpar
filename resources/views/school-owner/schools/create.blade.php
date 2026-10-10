@@ -23,7 +23,7 @@
 
     <div class="d-flex align-items-start justify-content-between mb-4 flex-wrap gap-2">
         <div>
-            <h4 style="font-size:20px; font-weight:800; color:#0f2d59; margin:0;">
+            <h4 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
                 <i class="fas fa-plus-circle me-2 text-warning"></i>List Your School for Free on SchoolMapr
             </h4>
             <p style="font-size:13px; color:#64748b; margin:4px 0 0;">

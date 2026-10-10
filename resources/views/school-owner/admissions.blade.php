@@ -7,7 +7,7 @@
 {{-- Header --}}
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
     <div>
-        <h4 style="font-size:20px; font-weight:800; color:#0f2d59; margin:0;">
+        <h4 style="font-size:20px; font-weight:800; color:#0f172a; margin:0;">
             <i class="fas fa-user-graduate me-2 text-primary"></i>Admission Applications Desk
         </h4>
         <p style="font-size:13px; color:#64748b; margin:4px 0 0;">
@@ -19,7 +19,7 @@
 {{-- Stats --}}
 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin-bottom:24px;">
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #3b82f6;">
-        <div style="font-size:24px; font-weight:900; color:#0f2d59;">{{ $stats['total'] }}</div>
+        <div style="font-size:24px; font-weight:900; color:#0f172a;">{{ $stats['total'] }}</div>
         <div style="font-size:11.5px; color:#64748b; font-weight:700; margin-top:2px;">Total Received</div>
     </div>
     <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:12px; padding:16px; border-top:3px solid #f59e0b;">
@@ -49,7 +49,7 @@
 @if($admissions->isEmpty())
 <div style="background:#fff; border:2px dashed #e2e8f0; border-radius:16px; padding:60px 20px; text-align:center;">
     <div style="font-size:48px; margin-bottom:12px;">📝</div>
-    <h5 style="font-size:16px; font-weight:800; color:#0f2d59;">No Admissions Submitted Yet</h5>
+    <h5 style="font-size:16px; font-weight:800; color:#0f172a;">No Admissions Submitted Yet</h5>
     <p style="font-size:13px; color:#64748b; max-width:340px; margin:4px auto 0;">
         When parents apply online for your school, applications will appear here for verification.
     </p>
@@ -58,7 +58,7 @@
 
 <div style="background:#fff; border:1.5px solid #e8ecf4; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
     <div style="padding:16px 20px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:14px; color:#0f2d59;">Student Applications ({{ $admissions->total() }})</strong>
+        <strong style="font-size:14px; color:#0f172a;">Student Applications ({{ $admissions->total() }})</strong>
         <span style="font-size:12px; color:#64748b;">Showing {{ $admissions->firstItem() }}–{{ $admissions->lastItem() }}</span>
     </div>
 
@@ -92,7 +92,7 @@
                     {{ $admissions->firstItem() + $i }}
                 </td>
                 <td style="padding:14px 16px;">
-                    <div style="font-size:14px; font-weight:800; color:#0f2d59;">{{ $adm->student_name }}</div>
+                    <div style="font-size:14px; font-weight:800; color:#0f172a;">{{ $adm->student_name }}</div>
                     <div style="font-size:11px; color:#64748b; margin-top:2px;">
                         DOB: {{ \Carbon\Carbon::parse($adm->student_dob)->format('d M Y') }} • {{ ucfirst($adm->student_gender) }}
                     </div>
