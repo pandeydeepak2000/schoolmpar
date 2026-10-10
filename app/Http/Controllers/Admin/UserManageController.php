@@ -13,7 +13,7 @@ class UserManageController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::with('roles');
+        $query = User::with('roles')->withCount(['schools', 'admissions', 'enquiries']);
 
         if ($request->filled('search')) {
             $query->where(function($q) use ($request) {
@@ -30,8 +30,16 @@ class UserManageController extends Controller
         $users = $query->latest()->paginate(15)->withQueryString();
         $roles = Role::all();
 
-        return view('admin.users', compact('users', 'roles'));
+        $stats = [
+            'all'          => User::count(),
+            'parent'       => User::role('parent')->count(),
+            'school_owner' => User::role('school_owner')->count(),
+            'admin'        => User::role('admin')->count(),
+        ];
+
+        return view('admin.users', compact('users', 'roles', 'stats'));
     }
+
 
     public function create()
     {

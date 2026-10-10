@@ -139,8 +139,13 @@ Route::prefix('admin')
     // ── Dashboard ────────────────────────────────────────
     Route::get('/dashboard',       [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/enquiries',       [DashboardController::class, 'enquiries'])->name('enquiries');
+    Route::get('/enquiries/export',       [DashboardController::class, 'exportEnquiries'])->name('enquiries.export');
+    Route::post('/enquiries/bulk-delete', [DashboardController::class, 'bulkDeleteEnquiries'])->name('enquiries.bulk-delete');
+    Route::post('/enquiries/{id}/notes',  [DashboardController::class, 'addEnquiryNote'])->name('enquiries.notes');
     Route::get('/admissions',      [DashboardController::class, 'admissions'])->name('admissions');
     Route::get('/visits',          [DashboardController::class, 'visits'])->name('visits');
+    Route::get('/visits/export',          [DashboardController::class, 'exportVisits'])->name('visits.export');
+    Route::post('/visits/bulk-delete',    [DashboardController::class, 'bulkDeleteVisits'])->name('visits.bulk-delete');
     Route::get('/payments',        [DashboardController::class, 'payments'])->name('payments');
     Route::get('/logs',            [DashboardController::class, 'activityLogs'])->name('logs');
 
@@ -160,9 +165,10 @@ Route::prefix('admin')
     Route::patch('/schools/{id}/reject',  [SchoolManageController::class, 'reject'])->name('schools.reject');
     Route::patch('/schools/{id}/toggle',  [SchoolManageController::class, 'toggle'])->name('schools.toggle');
 
-    // ── Enquiry ──────────────────────────────────────────
+    // ── Enquiry Actions ───────────────────────────────────
     Route::patch('/enquiries/{id}/status',       [SchoolManageController::class, 'updateEnquiry'])->name('enquiries.status');
     Route::post('/enquiries/{id}/send-brochure', [SchoolManageController::class, 'sendBrochure'])->name('enquiries.sendBrochure');
+
 
     // ── Users ────────────────────────────────────────────
     Route::get('/users',           [UserManageController::class, 'index'])->name('users');

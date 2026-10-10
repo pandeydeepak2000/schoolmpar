@@ -15,7 +15,43 @@ class Enquiry extends Model
         'child_class',
         'message',
         'status',
+        'admin_notes',
     ];
+
+    protected $casts = [
+        'admin_notes' => 'array',
+    ];
+
+    public function getNotesListAttribute(): array
+    {
+        $raw = $this->admin_notes;
+        if (empty($raw)) {
+            return [];
+        }
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+        return is_array($raw) ? $raw : [];
+    }
+
+    public function addAdminNote(string $noteText, ?string $followupDate = null, ?string $author = null): array
+    {
+        $list = $this->notes_list;
+        $newEntry = [
+            'id'               => (string) \Illuminate\Support\Str::uuid(),
+            'note'             => trim($noteText),
+            'followup_date'    => $followupDate ?: null,
+            'author'           => $author ?: (auth()->user()?->name ?? 'Admin'),
+            'created_at'       => now()->format('Y-m-d H:i:s'),
+            'created_at_human' => now()->format('d M Y, h:i A'),
+        ];
+        array_unshift($list, $newEntry); // newest first
+        $this->admin_notes = $list;
+        $this->save();
+        return $newEntry;
+    }
+
 
     public function getPhoneAttribute()
     {
