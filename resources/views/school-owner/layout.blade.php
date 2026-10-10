@@ -48,48 +48,50 @@
         .so-wrap { display: flex; min-height: calc(100vh - 62px); width: 100%; position: relative; }
 
         .so-sidebar {
-            background: #0f172a;
-            width: 236px; flex-shrink: 0;
+            background: #ffffff;
+            width: 248px; flex-shrink: 0;
             min-height: calc(100vh - 62px);
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid #e2e8f0;
             transition: transform 0.25s ease;
             z-index: 150;
         }
 
         .sidebar-section-title {
-            font-size: 10px; font-weight: 800;
-            color: rgba(255,255,255,.35);
+            font-size: 10.5px; font-weight: 800;
+            color: #94a3b8;
             text-transform: uppercase; letter-spacing: 1.2px;
-            padding: 18px 20px 6px;
+            padding: 16px 18px 5px;
         }
         .sidebar-link {
             display: flex; align-items: center; gap: 11px;
-            color: rgba(255,255,255,.65); font-size: 13.5px; font-weight: 500;
-            padding: 10px 20px; text-decoration: none;
+            color: #475569; font-size: 13.5px; font-weight: 600;
+            padding: 9px 14px; margin: 2px 10px; border-radius: 8px;
+            text-decoration: none;
             transition: all .18s; border-left: 3px solid transparent;
         }
         .sidebar-link:hover {
-            background: rgba(255,255,255,.07);
-            color: #fff; border-left-color: #60a5fa;
+            background: #f1f5f9;
+            color: #0f172a; border-left-color: #2563eb;
             text-decoration: none;
         }
         .sidebar-link.active {
-            background: rgba(37, 99, 235, 0.18);
-            color: #fff; border-left-color: #3b82f6; font-weight: 700;
+            background: #eff6ff;
+            color: #1d4ed8; border-left-color: #2563eb; font-weight: 700;
         }
-        .sidebar-link i { width: 16px; text-align: center; font-size: 13px; }
-        .sidebar-link.active i { color: #60a5fa !important; }
-        .sidebar-divider { border-color: rgba(255,255,255,.08); margin: 6px 0; }
+        .sidebar-link i { width: 16px; text-align: center; font-size: 13px; color: #94a3b8; }
+        .sidebar-link:hover i { color: #2563eb; }
+        .sidebar-link.active i { color: #2563eb !important; }
+        .sidebar-divider { border-color: #f1f5f9; margin: 6px 0; }
 
         .enq-badge {
             margin-left: auto; background: #2563eb; color: #fff;
             font-size: 10px; font-weight: 700; padding: 2px 7px;
             border-radius: 100px; min-width: 20px; text-align: center;
         }
-        .enq-badge.zero { background: rgba(255,255,255,.15); color: rgba(255,255,255,.5); }
+        .enq-badge.zero { background: #f1f5f9; color: #94a3b8; }
 
         .so-main { flex: 1; padding: 24px; min-width: 0; background: #f8fafc; overflow-x: hidden; }
 

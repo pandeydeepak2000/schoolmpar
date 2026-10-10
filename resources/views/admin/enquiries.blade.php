@@ -115,7 +115,7 @@
 
                 {{-- Action Buttons --}}
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                    <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 1px 3px rgba(37,99,235,0.3);">
                         <i class="fas fa-filter"></i> Apply
                     </button>
 
@@ -142,7 +142,7 @@
 <form id="bulkDeleteEnquiriesForm" action="{{ route('admin.enquiries.bulk-delete') }}" method="POST">
     @csrf
 
-    <div id="bulkActionBarEnquiry" style="display:none; background:#0f2d59; color:#fff; border-radius:10px; padding:12px 20px; margin-bottom:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; box-shadow:0 4px 12px rgba(15,45,89,0.18);">
+    <div id="bulkActionBarEnquiry" style="display:none; background:#1e293b; color:#fff; border-radius:10px; padding:12px 20px; margin-bottom:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; box-shadow:0 4px 12px rgba(15,23,42,0.18);">
         <div style="display:flex; align-items:center; gap:10px;">
             <i class="fas fa-check-circle" style="color:#38bdf8; font-size:16px;"></i>
             <span style="font-size:13.5px; font-weight:700;">
@@ -320,29 +320,29 @@
 
                         {{-- Quick Actions --}}
                         <td style="text-align:right;">
-                            <div style="display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:flex-end;">
+                            <div style="display:inline-flex; align-items:center; gap:5px; flex-wrap:nowrap; justify-content:flex-end;">
                                 {{-- WhatsApp Button --}}
                                 @if($cleanPhone)
                                 <a href="{{ $waLink }}" target="_blank"
-                                   style="background:#25D366; color:#fff; border-radius:6px; padding:6px 10px; font-size:11.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 4px rgba(37,211,102,0.2);"
+                                   style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; border-radius:6px; padding:5px 9px; font-size:11.5px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:all 0.15s;"
                                    title="Chat with parent on WhatsApp">
-                                    <i class="fab fa-whatsapp" style="font-size:13px;"></i> WhatsApp
+                                    <i class="fab fa-whatsapp" style="font-size:12.5px; color:#10b981;"></i> WA
                                 </a>
                                 @endif
 
                                 {{-- Email Brochure Button --}}
                                 <button type="button"
                                         onclick="openBrochureModal('{{ $enquiry->id }}', '{{ addslashes($enquiry->parent_name) }}', '{{ $parentEmail }}', '{{ addslashes($enquiry->school->name ?? 'School') }}', '{{ $enquiry->school?->prospectus_path ? 1 : 0 }}')"
-                                        style="background:#0f2d59; color:#fff; border:none; border-radius:6px; padding:6px 10px; font-size:11.5px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:4px;"
+                                        style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; border-radius:6px; padding:5px 9px; font-size:11.5px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:4px; transition:all 0.15s;"
                                         title="Send official school brochure to parent email">
-                                    <i class="fas fa-envelope"></i> Brochure
+                                    <i class="fas fa-envelope" style="font-size:11px;"></i> Brochure
                                 </button>
 
                                 {{-- Quick Status Dropdown --}}
                                 <form action="/admin/enquiries/{{ $enquiry->id }}/status" method="POST" style="margin:0; display:inline;">
                                     @csrf @method('PATCH')
                                     <select name="status" onchange="this.form.submit()"
-                                        style="border:1.5px solid #e2e8f0; border-radius:6px; padding:5px 8px; font-size:11px; outline:none; background:#fff; cursor:pointer; color:#374151; font-weight:600;">
+                                        style="border:1.5px solid #e2e8f0; border-radius:6px; padding:4px 7px; font-size:11px; outline:none; background:#fff; cursor:pointer; color:#374151; font-weight:700;">
                                         <option value="new"       {{ $enquiry->status=='new'       ? 'selected':'' }}>New</option>
                                         <option value="contacted" {{ $enquiry->status=='contacted' ? 'selected':'' }}>Contacted</option>
                                         <option value="closed"    {{ $enquiry->status=='closed'    ? 'selected':'' }}>Closed</option>
@@ -351,7 +351,7 @@
 
                                 {{-- Single Delete Button --}}
                                 <button type="button" onclick="singleDeleteEnquiry('{{ $enquiry->id }}', '{{ addslashes($enquiry->parent_name) }}')"
-                                        style="background:#fff1f2; color:#e11d48; border:1px solid #fecdd3; border-radius:6px; padding:5px 8px; font-size:11.5px; cursor:pointer;"
+                                        style="background:#fff1f2; color:#e11d48; border:1px solid #fecdd3; border-radius:6px; padding:5px 8px; font-size:11px; cursor:pointer;"
                                         title="Delete this enquiry record">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
@@ -393,12 +393,12 @@
     <div style="background:#fff; border-radius:16px; max-width:620px; width:100%; max-height:92vh; display:flex; flex-direction:column; box-shadow:0 25px 60px rgba(0,0,0,0.3); overflow:hidden;">
         
         {{-- Modal Header --}}
-        <div style="background:#0f2d59; color:#fff; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+        <div style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
             <div>
                 <div style="font-size:16px; font-weight:900; display:flex; align-items:center; gap:8px;">
-                    <i class="fas fa-headset text-sky-400"></i> Follow-up CRM & Call Log
+                    <i class="fas fa-headset text-sky-200"></i> Follow-up CRM & Call Log
                 </div>
-                <div id="crmModalSubHeader" style="font-size:12px; color:rgba(255,255,255,0.75); margin-top:2px;">
+                <div id="crmModalSubHeader" style="font-size:12px; color:rgba(255,255,255,0.85); margin-top:2px;">
                     —
                 </div>
             </div>
@@ -424,8 +424,8 @@
             <form id="addNoteForm" onsubmit="submitCrmNote(event)" style="background:#f0f7ff; border:1.5px solid #bfdbfe; border-radius:12px; padding:16px; margin:0;">
                 <input type="hidden" id="crmActiveEnquiryId" name="enquiry_id" value="">
 
-                <label style="display:block; font-size:12.5px; font-weight:800; color:#0f2d59; margin-bottom:6px;">
-                    <i class="fas fa-pen-fancy me-1 text-primary"></i> Log Call Notes / Conversation Remarks *
+                <label style="display:block; font-size:12.5px; font-weight:800; color:#1d4ed8; margin-bottom:6px;">
+                    <i class="fas fa-pen-fancy me-1"></i> Log Call Notes / Conversation Remarks *
                 </label>
                 <textarea id="crmNoteText" name="note" rows="3" required
                           placeholder="e.g. Called parent. Requested callback in 15 days for Class 5 admission. Mother inquired about school bus route..."
@@ -438,7 +438,7 @@
                             <i class="far fa-calendar-alt text-amber-600"></i> Next Follow-up Date (Optional)
                         </label>
                         <input type="date" id="crmFollowupDate" name="followup_date"
-                               style="width:100%; padding:7px 10px; border:1.5px solid #cbd5e1; border-radius:7px; font-size:12.5px; outline:none; color:#334155; background:#fff; box-sizing:border-box;">
+                                style="width:100%; padding:7px 10px; border:1.5px solid #cbd5e1; border-radius:7px; font-size:12.5px; outline:none; color:#334155; background:#fff; box-sizing:border-box;">
                     </div>
 
                     {{-- Update Status --}}
@@ -458,7 +458,7 @@
 
                 <div style="margin-top:12px; display:flex; justify-content:flex-end;">
                     <button type="submit" id="saveNoteSubmitBtn"
-                            style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 20px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(15,45,89,0.25);">
+                            style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 20px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                         <i class="fas fa-save"></i> Save Follow-up Remark
                     </button>
                 </div>

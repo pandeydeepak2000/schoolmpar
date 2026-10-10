@@ -107,7 +107,7 @@
 
                 {{-- Action Buttons --}}
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <button type="submit" style="background:#0f2d59; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                    <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 1px 3px rgba(37,99,235,0.3);">
                         <i class="fas fa-filter"></i> Apply
                     </button>
 
@@ -134,7 +134,7 @@
 <form id="bulkDeleteForm" action="{{ route('admin.visits.bulk-delete') }}" method="POST">
     @csrf
 
-    <div id="bulkActionBar" style="display:none; background:#0f2d59; color:#fff; border-radius:10px; padding:12px 20px; margin-bottom:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; box-shadow:0 4px 12px rgba(15,45,89,0.18);">
+    <div id="bulkActionBar" style="display:none; background:#1e293b; color:#fff; border-radius:10px; padding:12px 20px; margin-bottom:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; box-shadow:0 4px 12px rgba(15,23,42,0.18);">
         <div style="display:flex; align-items:center; gap:10px;">
             <i class="fas fa-check-circle" style="color:#38bdf8; font-size:16px;"></i>
             <span style="font-size:13.5px; font-weight:700;">

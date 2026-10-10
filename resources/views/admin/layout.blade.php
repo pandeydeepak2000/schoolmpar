@@ -15,77 +15,80 @@
         * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; box-sizing: border-box; }
         body { background: #f8fafc; color: #0f172a; margin: 0; min-height: 100vh; }
 
-        /* ── SIDEBAR (Executive Navy & Blue Accent) ── */
+        /* ── SIDEBAR (Next.js SaaS Blue & Pure White) ── */
         #sidebar {
-            width: 236px;
-            background: #0f172a;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            width: 248px;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
             position: fixed; top: 0; left: 0; height: 100vh;
             display: flex; flex-direction: column;
             z-index: 100;
             transition: transform 0.25s ease;
+            box-shadow: 1px 0 3px rgba(15, 23, 42, 0.02);
         }
         @media (max-width: 767px) {
-            #sidebar { transform: translateX(-100%); width: 260px; box-shadow: 4px 0 24px rgba(0,0,0,0.4); }
+            #sidebar { transform: translateX(-100%); width: 260px; box-shadow: 4px 0 24px rgba(15, 23, 42, 0.15); }
             #sidebar.open { transform: translateX(0); }
         }
 
         /* ── OVERLAY ── */
         #sidebar-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(15,23,42,0.6); z-index: 99;
+            background: rgba(15, 23, 42, 0.4); z-index: 99;
             backdrop-filter: blur(2px);
         }
         #sidebar-overlay.active { display: block; }
 
         /* ── MAIN CONTENT ── */
-        #main-content { margin-left: 236px; min-height: 100vh; display: flex; flex-direction: column; background: #f8fafc; }
+        #main-content { margin-left: 248px; min-height: 100vh; display: flex; flex-direction: column; background: #f8fafc; }
         @media (max-width: 767px) { #main-content { margin-left: 0; } }
 
-        /* ── NAV ITEMS ── */
+        /* ── NAV ITEMS (Next.js SaaS Design) ── */
         .nav-item {
             display: flex; align-items: center; gap: 11px;
-            padding: 9px 14px; margin: 2px 10px;
-            color: rgba(255,255,255,0.65);
-            font-size: 13px; font-weight: 500;
+            padding: 9px 12px; margin: 2px 10px;
+            color: #475569;
+            font-size: 13px; font-weight: 600;
             text-decoration: none; border-radius: 8px;
             transition: all 0.15s ease; white-space: nowrap;
             position: relative;
         }
         .nav-item:hover {
-            background: rgba(255,255,255,0.07);
-            color: #ffffff;
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        .nav-item:hover i {
+            color: #2563eb;
         }
         .nav-item.active {
-            background: rgba(37, 99, 235, 0.18);
-            color: #ffffff;
-            font-weight: 600;
-            border-left: 3px solid #3b82f6;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 700;
+            border-left: 3.5px solid #2563eb;
         }
         .nav-item i {
-            width: 16px; font-size: 13px; text-align: center;
-            color: rgba(255,255,255,0.4); flex-shrink: 0;
+            width: 17px; font-size: 14px; text-align: center;
+            color: #94a3b8; flex-shrink: 0;
             transition: color 0.15s ease;
         }
-        .nav-item:hover i { color: #93c5fd; }
-        .nav-item.active i { color: #60a5fa !important; }
+        .nav-item.active i { color: #2563eb !important; }
 
         /* ── NAV BADGE ── */
         .nav-badge {
             margin-left: auto;
             background: #2563eb; color: #ffffff;
-            font-size: 9.5px; font-weight: 800;
-            padding: 2px 7px; border-radius: 100px;
+            font-size: 10px; font-weight: 800;
+            padding: 2px 7.5px; border-radius: 100px;
             min-width: 18px; text-align: center;
             line-height: 1.4;
         }
 
         /* ── NAV GROUP LABEL ── */
         .nav-group-label {
-            padding: 16px 16px 5px 22px;
-            font-size: 10px; font-weight: 800;
+            padding: 15px 16px 5px 20px;
+            font-size: 10.5px; font-weight: 800;
             letter-spacing: 0.08em; text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
+            color: #94a3b8;
         }
 
         /* ── STAT CARDS ── */
@@ -313,19 +316,26 @@
     <aside id="sidebar">
 
         <!-- Logo Area -->
-        <div style="padding:18px 20px 16px; border-bottom:1px solid rgba(255,255,255,0.08);
+        <div style="padding:16px 18px; border-bottom:1px solid #f1f5f9;
                     display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-            <div>
-                <div style="font-size:16.5px; font-weight:900; color:#fff; letter-spacing:-0.3px; display:flex; align-items:center; gap:6px;">
-                    🎓 School<span style="color:#38bdf8;">Mapr</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:36px; height:36px; background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+                            border-radius:10px; display:flex; align-items:center; justify-content:center;
+                            color:#fff; font-size:16px; box-shadow:0 3px 8px rgba(37,99,235,0.28);">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                <div style="font-size:10.5px; color:rgba(255,255,255,0.45); margin-top:2px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;">
-                    Executive Admin Suite
+                <div>
+                    <div style="font-size:16.5px; font-weight:900; color:#0f172a; letter-spacing:-0.3px; line-height:1.15;">
+                        School<span style="color:#2563eb;">Mapr</span>
+                    </div>
+                    <div style="font-size:10px; color:#2563eb; margin-top:2px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; background:#eff6ff; display:inline-block; padding:1px 6px; border-radius:4px; border:1px solid #dbeafe;">
+                        Next SaaS Suite
+                    </div>
                 </div>
             </div>
             <button onclick="closeSidebar()" id="sidebar-close"
-                style="display:none; background:rgba(255,255,255,0.08); border:none;
-                       color:rgba(255,255,255,0.7); width:30px; height:30px;
+                style="display:none; background:#f1f5f9; border:none;
+                       color:#64748b; width:30px; height:30px;
                        border-radius:6px; cursor:pointer; font-size:14px;">
                 <i class="fas fa-times"></i>
             </button>
@@ -439,29 +449,29 @@
         </nav>
 
         <!-- Sidebar User Footer -->
-        <div style="padding:12px; border-top:1px solid rgba(255,255,255,0.08); flex-shrink:0;">
-            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px;
-                        border-radius:10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.05);">
-                <div style="width:32px; height:32px; background:linear-gradient(135deg,#0f2d59,#2563eb); border-radius:50%;
+        <div style="padding:12px; border-top:1px solid #f1f5f9; background:#fafafa; flex-shrink:0;">
+            <div style="display:flex; align-items:center; gap:10px; padding:9px 10px;
+                        border-radius:10px; background:#ffffff; border:1px solid #e2e8f0; box-shadow:0 1px 2px rgba(0,0,0,0.03);">
+                <div style="width:34px; height:34px; background:linear-gradient(135deg,#2563eb,#1d4ed8); border-radius:8px;
                             display:flex; align-items:center; justify-content:center;
-                            color:#fff; font-weight:800; font-size:12.5px; flex-shrink:0;">
+                            color:#fff; font-weight:800; font-size:13px; flex-shrink:0; box-shadow:0 2px 4px rgba(37,99,235,0.2);">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
                 <div style="flex:1; min-width:0;">
-                    <div style="font-size:12px; font-weight:700; color:#fff;
+                    <div style="font-size:12.5px; font-weight:800; color:#0f172a;
                                 overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
                         {{ Auth::user()->name }}
                     </div>
-                    <div style="font-size:10.5px; color:rgba(255,255,255,0.4); font-weight:500;">Super Administrator</div>
+                    <div style="font-size:10.5px; color:#64748b; font-weight:600;">Super Administrator</div>
                 </div>
                 <form action="{{ route('logout') }}" method="POST" style="margin:0;">
                     @csrf
                     <button type="submit" title="Logout"
-                        style="color:rgba(255,255,255,0.4); font-size:13px;
+                        style="color:#94a3b8; font-size:14px;
                                background:none; border:none; cursor:pointer; padding:5px;
                                transition: color 0.15s;"
                         onmouseover="this.style.color='#ef4444'"
-                        onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+                        onmouseout="this.style.color='#94a3b8'">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </form>
@@ -515,20 +525,20 @@
                     </button>
                 </form>
                 <a href="/" target="_blank"
-                   style="font-size:12px; color:#475569; text-decoration:none;
-                          font-weight:600; display:flex; align-items:center; gap:6px; white-space:nowrap;
-                          background:#f8fafc; border:1px solid #e2e8f0; border-radius:7px; padding:5px 11px;
+                   style="font-size:12px; color:#2563eb; text-decoration:none;
+                          font-weight:700; display:flex; align-items:center; gap:6px; white-space:nowrap;
+                          background:#eff6ff; border:1px solid #bfdbfe; border-radius:7px; padding:5px 12px;
                           transition:all 0.15s;">
-                    <i class="fas fa-globe" style="font-size:11px; color:#2563eb;"></i>
+                    <i class="fas fa-external-link-alt" style="font-size:10px; color:#2563eb;"></i>
                     <span class="hide-xs">Live Portal</span>
                 </a>
                 <div style="width:1px; height:20px; background:#e2e8f0;"></div>
                 <div style="width:34px; height:34px;
-                            background:linear-gradient(135deg,#0f172a 0%, #2563eb 100%);
+                            background:linear-gradient(135deg,#2563eb 0%, #1d4ed8 100%);
                             border-radius:50%; display:flex; align-items:center;
                             justify-content:center; color:#fff; font-weight:800;
                             font-size:13px; flex-shrink:0;
-                            box-shadow:0 2px 6px rgba(15,23,42,0.18);">
+                            box-shadow:0 2px 6px rgba(37,99,235,0.25);">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
             </div>

@@ -79,7 +79,7 @@
             {{-- All Tab --}}
             <a href="{{ route('admin.users', array_merge(request()->except(['role', 'page']), [])) }}"
                style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:8px; font-size:12.5px; font-weight:700; transition:all 0.15s;
-               {{ empty($activeRole) ? 'background:#0f2d59; color:#fff;' : 'background:#f8fafc; color:#64748b; border:1px solid #e2e8f0;' }}">
+               {{ empty($activeRole) ? 'background:#2563eb; color:#fff;' : 'background:#f8fafc; color:#64748b; border:1px solid #e2e8f0;' }}">
                 <i class="fas fa-users" style="font-size:12px;"></i> All Users
                 <span style="font-size:11px; padding:2px 7px; border-radius:100px; font-weight:800; {{ empty($activeRole) ? 'background:rgba(255,255,255,0.22); color:#fff;' : 'background:#e2e8f0; color:#475569;' }}">
                     {{ $stats['all'] ?? 0 }}
@@ -119,7 +119,7 @@
 
         {{-- Add User Action Button --}}
         <a href="{{ route('admin.users.create') }}"
-           style="background:linear-gradient(135deg, #0f2d59 0%, #1e40af 100%); color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:7px; box-shadow:0 2px 6px rgba(15,45,89,0.25); white-space:nowrap;">
+           style="background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color:#fff; border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:7px; box-shadow:0 2px 6px rgba(37,99,235,0.25); white-space:nowrap;">
             <i class="fas fa-user-plus"></i> Add New User
         </a>
     </div>
