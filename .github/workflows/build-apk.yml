@@ -52,7 +52,8 @@ jobs:
           ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
           EXIT_CODE=${PIPESTATUS[0]}
           if [ $EXIT_CODE -ne 0 ]; then
-            echo "::error::Gradle build failed with code $EXIT_CODE"
+            REASON=$(grep -m 1 -E "(FAILURE:|Caused by:|ERROR:|> Task :)" ../gradle.log || echo "Gradle build failed")
+            echo "::error title=Gradle Failure::$REASON"
             echo "===== LAST 100 LINES OF GRADLE LOG ====="
             tail -n 100 ../gradle.log
             exit $EXIT_CODE
