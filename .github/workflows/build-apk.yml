@@ -49,7 +49,21 @@ jobs:
       - name: Build Android Debug APK
         run: |
           cd android
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
+          EXIT_CODE=${PIPESTATUS[0]}
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::error::Gradle build failed with code $EXIT_CODE"
+            echo "===== LAST 100 LINES OF GRADLE LOG ====="
+            tail -n 100 ../gradle.log
+            exit $EXIT_CODE
+          fi
+
+      - name: Upload Gradle Build Log on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-failure-log
+          path: gradle.log
 
       - name: Prepare APK Output
         run: |
