@@ -49,19 +49,12 @@ jobs:
       - name: Build Android Debug APK
         run: |
           cd android
-          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee ../gradle.log
-
-      - name: Upload Gradle Log on Failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: gradle-build-failure-log
-          path: gradle.log
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Prepare APK Output
         run: |
           mkdir -p build-output
-          find android/ -name "*.apk" -exec cp {} build-output/SchoolMapr-v1.0.apk \;
+          cp android/app/build/outputs/apk/debug/app-debug.apk build-output/SchoolMapr-v1.0.apk
           ls -la build-output/
 
       - name: Upload APK Artifact
@@ -70,3 +63,4 @@ jobs:
           name: SchoolMapr-Android-APK
           path: build-output/SchoolMapr-v1.0.apk
           retention-days: 30
+          if-no-files-found: error
