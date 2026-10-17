@@ -1015,7 +1015,7 @@
 
             {{-- SEARCH PANEL (LOCATION + BOARD + GRADE + FINDER BUTTON) --}}
             <div class="sm-search-wrap">
-                <form action="{{ route('home') }}" method="GET" class="sm-search-panel">
+                <form action="{{ route('home') }}#school-listing" method="GET" class="sm-search-panel" id="heroSearchForm">
                     <div class="sm-search-grid">
                         
                         {{-- FIELD 1: LOCATION / AREA / SCHOOL NAME --}}
@@ -1023,7 +1023,7 @@
                             <i class="fa-solid fa-location-dot"></i>
                             <div class="sm-search-meta">
                                 <label>Location / Area / School Name</label>
-                                <input type="text" name="q" value="{{ request('q') }}" placeholder="e.g. Boring Road, Kankarbagh, DPS...">
+                                <input type="search" name="q" id="heroSearchInput" value="{{ request('q') }}" placeholder="e.g. Boring Road, Kankarbagh, DPS..." enterkeyhint="search" autocomplete="off" autocapitalize="none">
                             </div>
                         </div>
 
@@ -1032,7 +1032,7 @@
                             <i class="fa-solid fa-graduation-cap"></i>
                             <div class="sm-search-meta">
                                 <label>Education Board</label>
-                                <select name="board">
+                                <select name="board" onchange="this.form.submit()">
                                     <option value="">All Boards</option>
                                     <option value="CBSE" {{ request('board')=='CBSE'?'selected':'' }}>CBSE</option>
                                     <option value="ICSE" {{ request('board')=='ICSE'?'selected':'' }}>ICSE</option>
@@ -1047,7 +1047,7 @@
                             <i class="fa-solid fa-child"></i>
                             <div class="sm-search-meta">
                                 <label>Class / Grade</label>
-                                <select name="class_from">
+                                <select name="class_from" onchange="this.form.submit()">
                                     <option value="">All Classes</option>
                                     <option value="1" {{ request('class_from')=='1'?'selected':'' }}>Primary (Cl. 1-5)</option>
                                     <option value="6" {{ request('class_from')=='6'?'selected':'' }}>Middle (Cl. 6-8)</option>
@@ -1060,7 +1060,7 @@
 
                         {{-- FIELD 4: SUBMIT BUTTON WITH FINDER ARROW --}}
                         <div class="sm-search-btn-wrap">
-                            <button type="submit" class="sm-search-btn">
+                            <button type="submit" id="heroSearchBtn" class="sm-search-btn">
                                 <i class="fa-solid fa-location-arrow"></i> Find Schools
                             </button>
                         </div>
@@ -1780,6 +1780,20 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         updateCompareUI();
+
+        const heroInput = document.getElementById('heroSearchInput');
+        const heroForm = document.getElementById('heroSearchForm');
+        if (heroInput && heroForm) {
+            heroInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    e.preventDefault();
+                    heroForm.submit();
+                }
+            });
+            heroInput.addEventListener('search', function() {
+                heroForm.submit();
+            });
+        }
 
         @if(request()->hasAny(['q', 'board', 'class_from', 'sort']))
             const target = document.getElementById('school-listing');

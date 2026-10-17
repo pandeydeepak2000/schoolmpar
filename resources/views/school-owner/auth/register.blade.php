@@ -439,6 +439,11 @@
             font-size: 11.5px;
             color: #94a3b8;
         }
+
+        @media (max-width: 640px) {
+            .sm-back { display: none !important; }
+            .sm-header { justify-content: center !important; padding: 14px 16px !important; }
+        }
     </style>
 </head>
 <body>
@@ -448,7 +453,7 @@
             <i class="fa-solid fa-graduation-cap" style="color:var(--yellow);"></i> School<span>Mapr</span>
         </a>
         <a href="/" class="sm-back">
-            <i class="fa-solid fa-arrow-left"></i> Back to Patna Schools
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
     </header>
 
